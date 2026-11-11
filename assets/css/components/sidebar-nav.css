@@ -1,0 +1,234 @@
+/* ==========================================================================
+   Dashboard menu - the white card with the nested menu and the laptop artwork.
+   A card in the left column from 1200px; a slide-in drawer below that (sidebar.js).
+   (source: src/pages/Dashboard.css)
+   ========================================================================== */
+
+.db-sidebar {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  color: var(--color-text);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+}
+
+/* Drawer header (title + close) - only in drawer mode */
+.db-sidebar-head {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 16px 6px 22px;
+}
+.db-sidebar-heading {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--color-text-strong);
+}
+.db-sidebar-close {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: #f1f5f9;
+  color: var(--color-text);
+  transition: background-color 0.2s ease;
+}
+.db-sidebar-close:hover { background: #e2e8f0; }
+
+/* --- Navigation: rows are spaced apart so the menu doesn't read as one block --- */
+.db-nav {
+  padding: 22px 14px 18px;
+}
+
+.db-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Icon colour per top-level entry */
+.db-nav-entry { --db-nav-color: #1e293b; }
+.db-nav-entry.is-blue { --db-nav-color: #2563eb; }
+.db-nav-entry.is-slate { --db-nav-color: #1e293b; }
+.db-nav-entry.is-indigo { --db-nav-color: #4338ca; }
+.db-nav-entry.is-orange { --db-nav-color: #ea580c; }
+.db-nav-entry.is-rose { --db-nav-color: #e11d48; }
+.db-nav-entry.is-green { --db-nav-color: #16a34a; }
+.db-nav-entry.is-emerald { --db-nav-color: #15803d; }
+
+/* Top-level rows: a link (leaf) or a button that opens its sub-menu */
+.db-nav-item {
+  position: relative;
+  width: 100%;
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  padding: 10px 16px 10px 14px;
+  border: none;
+  border-radius: 14px;
+  background: transparent;
+  color: var(--color-text);
+  font-size: 16px;
+  font-weight: 500;
+  text-align: left;
+  text-decoration: none;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+.db-nav-item:hover {
+  background-color: #f1f5f9;
+  transform: translateX(3px);
+}
+
+/* The open section (or the branch holding it) */
+.db-nav-item.is-active,
+.db-nav-item.has-active {
+  background: linear-gradient(100deg, #1d4ed8 0%, #2563eb 55%, #3b82f6 100%);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+.db-nav-item.is-active:hover,
+.db-nav-item.has-active:hover { transform: none; }
+
+.db-nav-icon {
+  margin-right: 16px;
+  transition: color 0.25s ease;
+}
+.db-nav-item .db-nav-icon { color: var(--db-nav-color); }
+.db-nav-item.is-active .db-nav-icon,
+.db-nav-item.has-active .db-nav-icon { color: #ffffff; }
+
+.db-nav-title {
+  min-width: 0;
+}
+
+.db-nav-arrow {
+  margin-left: auto;
+  padding-left: 4px;
+  color: #334155;
+  transition: transform 0.2s ease;
+}
+[aria-expanded="true"] > .db-nav-arrow { transform: rotate(180deg); }
+.db-nav-item.is-active .db-nav-arrow,
+.db-nav-item.has-active .db-nav-arrow { color: #ffffff; }
+
+/* --- Sub-menus --- */
+.db-nav-sublist {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 14px 0 4px 26px;
+  padding: 4px 0 4px 12px;
+  border-left: 2px solid #e2e8f0;
+  animation: db-sublist-in 0.2s ease;
+}
+/* A sub-menu inside a sub-menu sits a little closer to its row */
+.db-nav-sublist .db-nav-sublist { margin: 10px 0 2px 18px; }
+
+@keyframes db-sublist-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.db-nav-subitem {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 11px;
+  background: transparent;
+  color: #475569;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.db-nav-subitem:hover {
+  background-color: #f1f5f9;
+  color: #0f172a;
+}
+.db-nav-subitem.is-active,
+.db-nav-subitem.has-active {
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-weight: 600;
+}
+.db-nav-subitem .db-nav-icon {
+  margin-right: 10px;
+  color: #64748b;
+}
+.db-nav-subitem.is-active .db-nav-icon,
+.db-nav-subitem.has-active .db-nav-icon { color: #2563eb; }
+
+/* --- Laptop + app tiles art pinned to the bottom of the card --- */
+.db-sidebar-art {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 340 / 210;
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+/* The drawer's dimmed backdrop */
+.db-sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-sidebar-backdrop);
+  background: rgba(15, 23, 42, 0.45);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  animation: db-fade-in 0.25s ease;
+}
+@keyframes db-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ==========================================================================
+   Drawer mode (below 1200px)
+   ========================================================================== */
+@media (max-width: 1199.98px) {
+  .db-sidebar {
+    position: fixed;
+    z-index: var(--z-sidebar-drawer);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: min(360px, 88vw);
+    border-radius: 0 var(--radius-card) var(--radius-card) 0;
+    border-left: none;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.28);
+    transform: translateX(-104%);
+    visibility: hidden;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 0.35s;
+  }
+  .db-sidebar.is-open {
+    transform: none;
+    visibility: visible;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s;
+  }
+  .db-sidebar-head { display: flex; }
+  .db-nav { padding-top: 10px; }
+  .db-nav-item { font-size: 15.5px; }
+  .db-sidebar-art { margin-top: 12px; }
+}
+
+/* The backdrop only exists in drawer mode */
+@media (min-width: 1200px) {
+  .db-sidebar-backdrop { display: none !important; }
+}

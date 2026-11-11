@@ -1,0 +1,62 @@
+/* ==========================================================================
+   Design tokens - colours, type, spacing, radii, shadows, layers and breakpoints.
+   Components keep their own artwork colours; these are the shared values.
+   ========================================================================== */
+
+:root {
+  /* Brand */
+  --color-forest: #0b5d3b;
+  --color-forest-2: #1b7a46;
+  --color-forest-dark: #073322;
+  --color-orange: #ff7a00;
+  --color-saffron: #f5a900;
+  --color-blue: #2563eb;
+  --color-blue-dark: #1d4ed8;
+  --color-green: #16a34a;
+
+  /* Neutrals (Tailwind slate scale) */
+  --color-bg: #f8fafc;
+  --color-surface: #ffffff;
+  --color-border: #eef2f7;
+  --color-text: #1e293b;
+  --color-text-strong: #0f172a;
+  --color-text-muted: #64748b;
+  --color-focus: #1d4ed8;
+
+  /* Type */
+  --font-display: 'Outfit', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  /* Spacing: page gutter grows with the screen (16px on phones, 40px on large screens) */
+  --gutter: clamp(16px, 2.6vw, 40px);
+  --section-gap: clamp(24px, 3vw, 40px);
+
+  /* Radii and shadows */
+  --radius-card: 26px;
+  --radius-lg: 22px;
+  --shadow-card: 0 18px 40px rgba(15, 23, 42, 0.08), 0 3px 10px rgba(15, 23, 42, 0.04);
+
+  /* Layers */
+  --z-sidebar-drawer: 1004;
+  --z-sidebar-backdrop: 1003;
+
+  /* Fixed navbar: 10px offset + bar height (68px desktop, 60px below 1200px) */
+  --nav-offset: 88px;
+
+  /* Left column width on desktop */
+  --left-col: 336px;
+
+  /*
+   * Breakpoints (used in media queries; custom properties can't be used inside them):
+   *   xs   0 - 479     small phones
+   *   sm   480 - 767   large phones
+   *   md   768 - 1023  tablets (portrait)
+   *   lg   1024 - 1199 tablets (landscape) / small laptops - dashboard menu is a drawer up to here
+   *   xl   1200 - 1535 laptops and desktops - two-column dashboard
+   *   2xl  1536+       large screens - content width is capped
+   */
+}
+
+@media (max-width: 1199.98px) {
+  :root { --nav-offset: 80px; }
+}

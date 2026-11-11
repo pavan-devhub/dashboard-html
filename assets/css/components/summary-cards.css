@@ -1,0 +1,163 @@
+/* ==========================================================================
+   Summary cards - shared frame of the ERS / Krishi Coins / Plan cards in the left column.
+   (source: src/pages/Dashboard.css)
+   ========================================================================== */
+
+/* OVERVIEW SUMMARY CARDS: ERS / Krishi Coins / Plan, one under another below the sidebar */
+.db-summary-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  /* extra breathing room between the nav card and ERS, on top of .db-left-col's 24px gap */
+  margin-top: 16px;
+  font-family: 'Outfit', 'Inter', sans-serif;
+}
+.db-summary-grid button { font-family: inherit; }
+
+.db-summary-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 20px;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.07), 0 2px 6px rgba(15, 23, 42, 0.04);
+  border: 1px solid #eef2f7;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 228px;
+  box-sizing: border-box;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.db-summary-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.1);
+}
+
+.db-summary-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.db-summary-icon-wrap {
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.db-summary-title {
+  margin: 0 0 2px 0;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  color: #0f172a;
+}
+.db-summary-subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.db-summary-bar-track {
+  width: 100%;
+  height: 8px;
+  border-radius: 20px;
+  background: #f1f5f9;
+  overflow: hidden;
+}
+.db-summary-bar-fill {
+  height: 100%;
+  border-radius: 20px;
+}
+
+/* --- shared pieces (Krishi Coins) --- */
+.db-premium-glow {
+  position: absolute;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  filter: blur(36px);
+  opacity: 0.55;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.db-coins2-card:hover .db-premium-glow { opacity: 0.8; }
+
+.db-premium-header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.db-premium-icon-wrap {
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #fff;
+}
+.db-premium-heading { min-width: 0; }
+.db-premium-title {
+  margin: 0 0 2px 0;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  color: #0f172a;
+}
+.db-premium-subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: #475569;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.db-premium-cta {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease;
+}
+.db-premium-cta-text { display: flex; flex-direction: column; gap: 1px; text-align: left; min-width: 0; }
+.db-premium-cta-text strong { font-size: 15px; font-weight: 600; letter-spacing: 0.1px; color: #fff; }
+.db-premium-cta-circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+  transition: transform 0.22s ease;
+}
+.db-premium-cta:hover .db-premium-cta-circle { transform: translateX(3px); }
+.db-premium-cta:hover { transform: translateY(-2px); filter: brightness(1.06); }
+
+.db-premium-hint {
+  position: relative;
+  z-index: 1;
+  font-size: 13px;
+  color: #1e293b;
+  font-weight: 500;
+  line-height: 1.35;
+  max-width: 150px;
+}

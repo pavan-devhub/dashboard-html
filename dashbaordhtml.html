@@ -1,0 +1,1857 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>My Dashboard | FEED MSCS LTD</title>
+  <meta name="description" content="FEED member dashboard - updates, account overview, FEED services, quick access, Central &amp; State updates, recent activity and market prices.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0b5d3b">
+  <meta name="color-scheme" content="light">
+
+  <link rel="icon" type="image/svg+xml" href="assets/images/brand/favicon.svg">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Outfit:wght@400;500;600;700;800;900&amp;display=swap">
+
+  <!-- Largest image above the fold -->
+  <link rel="preload" as="image" href="assets/images/dashboard/welcome-hero-bg.webp" fetchpriority="high">
+
+  <!-- Styles: base -> layout -> components -->
+  <link rel="stylesheet" href="assets/css/base/variables.css">
+  <link rel="stylesheet" href="assets/css/base/reset.css">
+  <link rel="stylesheet" href="assets/css/base/base.css">
+  <link rel="stylesheet" href="assets/css/layout/navbar.css">
+  <link rel="stylesheet" href="assets/css/layout/dashboard.css">
+  <link rel="stylesheet" href="assets/css/layout/footer.css">
+  <link rel="stylesheet" href="assets/css/components/notification-bell.css">
+  <link rel="stylesheet" href="assets/css/components/account-menu.css">
+  <link rel="stylesheet" href="assets/css/components/feed-updates.css">
+  <link rel="stylesheet" href="assets/css/components/sidebar-nav.css">
+  <link rel="stylesheet" href="assets/css/components/summary-cards.css">
+  <link rel="stylesheet" href="assets/css/components/ers-card.css">
+  <link rel="stylesheet" href="assets/css/components/krishi-coins-card.css">
+  <link rel="stylesheet" href="assets/css/components/plan-card.css">
+  <link rel="stylesheet" href="assets/css/components/welcome-hero.css">
+  <link rel="stylesheet" href="assets/css/components/services.css">
+  <link rel="stylesheet" href="assets/css/components/quick-access.css">
+  <link rel="stylesheet" href="assets/css/components/widgets.css">
+  <link rel="stylesheet" href="assets/css/components/market-prices.css">
+  <link rel="stylesheet" href="assets/css/components/devices.css">
+  <link rel="stylesheet" href="assets/css/components/toast.css">
+  <!-- Dashboard views opened from the menu and the cards -->
+  <link rel="stylesheet" href="assets/css/components/view-page.css">
+  <link rel="stylesheet" href="assets/css/components/my-details.css">
+  <link rel="stylesheet" href="assets/css/components/epm-activities.css">
+  <link rel="stylesheet" href="assets/css/components/ers-assessment.css">
+  <link rel="stylesheet" href="assets/css/components/plans.css">
+
+  <!-- Marks that scripts run, so styles that depend on them (entrance animations) can apply -->
+  <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
+
+  <!-- Scripts: plain deferred scripts on one window.FEED namespace, so the page also works from file://.
+       config.js is the one place to set links to the rest of the FEED site. -->
+  <script defer src="assets/js/config.js"></script>
+  <script defer src="assets/js/utils.js"></script>
+  <script defer src="assets/js/data/ers-data.js"></script>
+  <script defer src="assets/js/ers-store.js"></script>
+  <script defer src="assets/js/navbar.js"></script>
+  <script defer src="assets/js/devices.js"></script>
+  <script defer src="assets/js/sidebar.js"></script>
+  <script defer src="assets/js/router.js"></script>
+  <script defer src="assets/js/widgets.js"></script>
+  <script defer src="assets/js/summary-cards.js"></script>
+  <script defer src="assets/js/ers-assessment.js"></script>
+  <script defer src="assets/js/plans.js"></script>
+  <script defer src="assets/js/my-details.js"></script>
+  <script defer src="assets/js/epm-activities.js"></script>
+  <script defer src="assets/js/main.js"></script>
+</head>
+
+<body class="page page--dashboard">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- Icon sprite (Lucide icons, ISC licence; social icons from Font Awesome Free, CC BY 4.0).
+       Use: <svg class="icon" width="20" height="20"><use href="#icon-house"></use></svg> -->
+  <svg class="icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <symbol id="icon-house" viewBox="0 0 24 24"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+      <symbol id="icon-building" viewBox="0 0 24 24"><path d="M10 12h4"/><path d="M10 8h4"/><path d="M14 21v-3a2 2 0 0 0-4 0v3"/><path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"/><path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"/></symbol>
+      <symbol id="icon-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+      <symbol id="icon-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+      <symbol id="icon-settings" viewBox="0 0 24 24"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></symbol>
+      <symbol id="icon-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol>
+      <symbol id="icon-calendar-days" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></symbol>
+      <symbol id="icon-map" viewBox="0 0 24 24"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/></symbol>
+      <symbol id="icon-activity" viewBox="0 0 24 24"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></symbol>
+      <symbol id="icon-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></symbol>
+      <symbol id="icon-users-round" viewBox="0 0 24 24"><path d="M18 21a8 8 0 0 0-16 0"/><circle cx="10" cy="8" r="5"/><path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3"/></symbol>
+      <symbol id="icon-user" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+      <symbol id="icon-package" viewBox="0 0 24 24"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></symbol>
+      <symbol id="icon-phone-call" viewBox="0 0 24 24"><path d="M13 2a9 9 0 0 1 9 9"/><path d="M13 6a5 5 0 0 1 5 5"/><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></symbol>
+      <symbol id="icon-phone" viewBox="0 0 24 24"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></symbol>
+      <symbol id="icon-bell" viewBox="0 0 24 24"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></symbol>
+      <symbol id="icon-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></symbol>
+      <symbol id="icon-menu" viewBox="0 0 24 24"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></symbol>
+      <symbol id="icon-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+      <symbol id="icon-camera" viewBox="0 0 24 24"><path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z"/><circle cx="12" cy="13" r="3"/></symbol>
+      <symbol id="icon-layout-dashboard" viewBox="0 0 24 24"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></symbol>
+      <symbol id="icon-laptop" viewBox="0 0 24 24"><path d="M18 5a2 2 0 0 1 2 2v8.526a2 2 0 0 0 .212.897l1.068 2.127a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45l1.068-2.127A2 2 0 0 0 4 15.526V7a2 2 0 0 1 2-2z"/><path d="M20.054 15.987H3.946"/></symbol>
+      <symbol id="icon-log-out" viewBox="0 0 24 24"><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/></symbol>
+      <symbol id="icon-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+      <symbol id="icon-file-text" viewBox="0 0 24 24"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
+      <symbol id="icon-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></symbol>
+      <symbol id="icon-earth" viewBox="0 0 24 24"><path d="M21.54 15H17a2 2 0 0 0-2 2v4.54"/><path d="M7 3.34V5a3 3 0 0 0 3 3a2 2 0 0 1 2 2c0 1.1.9 2 2 2a2 2 0 0 0 2-2c0-1.1.9-2 2-2h3.17"/><path d="M11 21.95V18a2 2 0 0 0-2-2a2 2 0 0 1-2-2v-1a2 2 0 0 0-2-2H2.05"/><circle cx="12" cy="12" r="10"/></symbol>
+      <symbol id="icon-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></symbol>
+      <symbol id="icon-chart-column" viewBox="0 0 24 24"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></symbol>
+      <symbol id="icon-shield-check" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+      <symbol id="icon-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+      <symbol id="icon-arrow-right-left" viewBox="0 0 24 24"><path d="m16 3 4 4-4 4"/><path d="M20 7H4"/><path d="m8 21-4-4 4-4"/><path d="M4 17h16"/></symbol>
+      <symbol id="icon-scroll-text" viewBox="0 0 24 24"><path d="M15 12h-5"/><path d="M15 8h-5"/><path d="M19 17V5a2 2 0 0 0-2-2H4"/><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"/></symbol>
+      <symbol id="icon-sprout" viewBox="0 0 24 24"><path d="M14 9.536V7a4 4 0 0 1 4-4h1.5a.5.5 0 0 1 .5.5V5a4 4 0 0 1-4 4 4 4 0 0 0-4 4c0 2 1 3 1 5a5 5 0 0 1-1 3"/><path d="M4 9a5 5 0 0 1 8 4 5 5 0 0 1-8-4"/><path d="M5 21h14"/></symbol>
+      <symbol id="icon-banknote" viewBox="0 0 24 24"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></symbol>
+      <symbol id="icon-clipboard-list" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></symbol>
+      <symbol id="icon-trending-up" viewBox="0 0 24 24"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></symbol>
+      <symbol id="icon-warehouse" viewBox="0 0 24 24"><path d="M18 21V10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v11"/><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 1.132-1.803l7.95-3.974a2 2 0 0 1 1.837 0l7.948 3.974A2 2 0 0 1 22 8z"/><path d="M6 13h12"/><path d="M6 17h12"/></symbol>
+      <symbol id="icon-wallet" viewBox="0 0 24 24"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></symbol>
+      <symbol id="icon-landmark" viewBox="0 0 24 24"><path d="M10 18v-7"/><path d="M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z"/><path d="M14 18v-7"/><path d="M18 18v-7"/><path d="M3 22h18"/><path d="M6 18v-7"/></symbol>
+      <symbol id="icon-receipt" viewBox="0 0 24 24"><path d="M12 17V7"/><path d="M16 8h-6a2 2 0 0 0 0 4h4a2 2 0 0 1 0 4H8"/><path d="M4 3a1 1 0 0 1 1-1 1.3 1.3 0 0 1 .7.2l.933.6a1.3 1.3 0 0 0 1.4 0l.934-.6a1.3 1.3 0 0 1 1.4 0l.933.6a1.3 1.3 0 0 0 1.4 0l.933-.6a1.3 1.3 0 0 1 1.4 0l.934.6a1.3 1.3 0 0 0 1.4 0l.933-.6A1.3 1.3 0 0 1 19 2a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1 1.3 1.3 0 0 1-.7-.2l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.934.6a1.3 1.3 0 0 1-1.4 0l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-1.4 0l-.934-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-.7.2 1 1 0 0 1-1-1z"/></symbol>
+      <symbol id="icon-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+      <symbol id="icon-hand-coins" viewBox="0 0 24 24"><path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17"/><path d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9"/><path d="m2 16 6 6"/><circle cx="16" cy="9" r="2.9"/><circle cx="6" cy="5" r="3"/></symbol>
+      <symbol id="icon-crown" viewBox="0 0 24 24"><path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z"/><path d="M5 21h14"/></symbol>
+      <symbol id="icon-star" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></symbol>
+      <symbol id="icon-megaphone" viewBox="0 0 24 24"><path d="M11 6a13 13 0 0 0 8.4-2.8A1 1 0 0 1 21 4v12a1 1 0 0 1-1.6.8A13 13 0 0 0 11 14H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"/><path d="M6 14a12 12 0 0 0 2.4 7.2 2 2 0 0 0 3.2-2.4A8 8 0 0 1 10 14"/><path d="M8 6v8"/></symbol>
+      <symbol id="icon-graduation-cap" viewBox="0 0 24 24"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></symbol>
+      <symbol id="icon-clipboard-check" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></symbol>
+      <symbol id="icon-send" viewBox="0 0 24 24"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></symbol>
+      <symbol id="icon-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+      <symbol id="icon-headset" viewBox="0 0 24 24"><path d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm0 0a9 9 0 1 1 18 0m0 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3Z"/><path d="M21 16v2a4 4 0 0 1-4 4h-5"/></symbol>
+      <symbol id="icon-book-open" viewBox="0 0 24 24"><path d="M12 5v16"/><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"/></symbol>
+      <symbol id="icon-alarm-clock" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M5 3 2 6"/><path d="m22 6-3-3"/><path d="M6.38 18.7 4 21"/><path d="M17.64 18.67 20 21"/></symbol>
+      <symbol id="icon-panel-left" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></symbol>
+      <symbol id="icon-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></symbol>
+      <symbol id="icon-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+      <symbol id="icon-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+      <symbol id="icon-rotate-ccw" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></symbol>
+      <symbol id="icon-loader-circle" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></symbol>
+      <symbol id="icon-circle-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
+      <symbol id="icon-circle-x" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></symbol>
+      <symbol id="icon-award" viewBox="0 0 24 24"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></symbol>
+      <symbol id="icon-indian-rupee" viewBox="0 0 24 24"><path d="M6 3h12"/><path d="M6 8h12"/><path d="m6 13 8.5 8"/><path d="M6 13h3"/><path d="M9 13c6.667 0 6.667-10 0-10"/></symbol>
+      <symbol id="icon-gem" viewBox="0 0 24 24"><path d="M10.5 3 8 9l4 13 4-13-2.5-6"/><path d="M17 3a2 2 0 0 1 1.6.8l3 4a2 2 0 0 1 .013 2.382l-7.99 10.986a2 2 0 0 1-3.247 0l-7.99-10.986A2 2 0 0 1 2.4 7.8l2.998-3.997A2 2 0 0 1 7 3z"/><path d="M2 9h20"/></symbol>
+      <symbol id="icon-sparkles" viewBox="0 0 24 24"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/><path d="M20 2v4"/><path d="M22 4h-4"/><circle cx="4" cy="20" r="2"/></symbol>
+      <symbol id="icon-file-badge" viewBox="0 0 24 24"><path d="M13 22h5a2 2 0 0 0 2-2V8a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 14 2H6a2 2 0 0 0-2 2v3.3"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="m7.69 16.479 1.29 4.88a.5.5 0 0 1-.698.591l-1.843-.849a1 1 0 0 0-.879.001l-1.846.85a.5.5 0 0 1-.692-.593l1.29-4.88"/><circle cx="6" cy="14" r="3"/></symbol>
+      <symbol id="icon-credit-card" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></symbol>
+      <symbol id="icon-qr-code" viewBox="0 0 24 24"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></symbol>
+      <symbol id="icon-cloud-upload" viewBox="0 0 24 24"><path d="M12 13v8"/><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="m8 17 4-4 4 4"/></symbol>
+      <symbol id="icon-save" viewBox="0 0 24 24"><path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7"/><path d="M7 3v4a1 1 0 0 0 1 1h7"/></symbol>
+      <symbol id="icon-heart-handshake" viewBox="0 0 24 24"><path d="M19.414 14.414C21 12.828 22 11.5 22 9.5a5.5 5.5 0 0 0-9.591-3.676.6.6 0 0 1-.818.001A5.5 5.5 0 0 0 2 9.5c0 2.3 1.5 4 3 5.5l5.535 5.362a2 2 0 0 0 2.879.052 2.12 2.12 0 0 0-.004-3 2.124 2.124 0 1 0 3-3 2.124 2.124 0 0 0 3.004 0 2 2 0 0 0 0-2.828l-1.881-1.882a2.41 2.41 0 0 0-3.409 0l-1.71 1.71a2 2 0 0 1-2.828 0 2 2 0 0 1 0-2.828l2.823-2.762"/></symbol>
+      <symbol id="icon-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+      <symbol id="icon-smartphone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></symbol>
+      <symbol id="icon-badge-check" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></symbol>
+      <symbol id="icon-circle-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></symbol>
+      <symbol id="icon-announce" viewBox="0 0 24 24"><path d="M3.2 9.2 H6.4 L14.6 4.6 V19.4 L6.4 14.8 H3.2 A1.2 1.2 0 0 1 2 13.6 V10.4 A1.2 1.2 0 0 1 3.2 9.2 Z" fill="currentColor" stroke="none"/><path d="M6.6 15.2 L7.9 19.2 A1 1 0 0 0 8.85 19.9 H9.9 A0.8 0.8 0 0 0 10.65 18.85 L9.6 15.9 Z" fill="currentColor" stroke="none"/><path d="M17.6 8.6 L20.2 7.2 M18.1 12 H21.2 M17.6 15.4 L20.2 16.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+      <symbol id="icon-bars" viewBox="0 0 26 22"><path d="M2 20h22"/><path d="M7 15.5V10"/><path d="M13 15.5V3"/><path d="M19 15.5V8"/></symbol>
+      <symbol id="icon-trend-up" viewBox="0 0 24 24"><path d="M5 19 19 5"/><path d="M8 5h11v11"/></symbol>
+      <symbol id="icon-trend-down" viewBox="0 0 24 24"><path d="m5 5 14 14"/><path d="M19 8v11H8"/></symbol>
+      <symbol id="icon-arrow-right-short" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></symbol>
+      <symbol id="icon-map-pin-solid" viewBox="0 0 384 512"><path d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z" fill="currentColor" stroke="none"/></symbol>
+      <symbol id="icon-envelope" viewBox="0 0 512 512"><path d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z" fill="currentColor" stroke="none"/></symbol>
+      <symbol id="icon-facebook" viewBox="0 0 320 512"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z" fill="currentColor" stroke="none"/></symbol>
+      <symbol id="icon-linkedin" viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" fill="currentColor" stroke="none"/></symbol>
+      <symbol id="icon-instagram" viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" fill="currentColor" stroke="none"/></symbol>
+      <symbol id="icon-youtube" viewBox="0 0 576 512"><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" fill="currentColor" stroke="none"/></symbol>
+  </svg>
+
+  <!-- =====================================================================
+       SITE HEADER - floating navbar, services mega menu, account and mobile menus
+       ===================================================================== -->
+  <header class="site-header">
+    <div class="fw-services-overlay" data-services-overlay hidden></div>
+
+    <nav class="fw-nav-root" aria-label="Main">
+      <div class="fw-navbar">
+        <a class="fw-navbar-logo" href="#" data-route="home" aria-label="FEED MSCS LTD - home">
+          <span class="fw-navbar-logo-badge">
+            <img src="assets/images/brand/feed-logo.avif" alt="" width="36" height="36">
+          </span>
+          <span class="fw-navbar-logo-text">
+            <span class="fw-navbar-logo-title">FEED MSCS LTD</span>
+            <span class="fw-navbar-logo-tagline">Empowering Farmers, Enriching Futures</span>
+          </span>
+        </a>
+
+        <span class="fw-navbar-divider" aria-hidden="true"></span>
+
+        <ul class="fw-navbar-links">
+          <li class="fw-nav-item">
+            <a class="fw-nav-btn" href="#" data-route="home">
+              <svg class="icon fw-nav-icon" width="16" height="16" stroke-width="1.75" aria-hidden="true"><use href="#icon-house"></use></svg>
+              <span class="fw-nav-label-row"><span class="fw-nav-label">Home</span></span>
+            </a>
+          </li>
+          <li class="fw-nav-item">
+            <a class="fw-nav-btn" href="#" data-route="about">
+              <svg class="icon fw-nav-icon" width="16" height="16" stroke-width="1.75" aria-hidden="true"><use href="#icon-building"></use></svg>
+              <span class="fw-nav-label-row">
+                <span class="fw-nav-label">About Us</span>
+                <svg class="icon fw-nav-chevron" width="10" height="10" stroke-width="3" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
+              </span>
+            </a>
+          </li>
+          <li class="fw-nav-item" data-services-item>
+            <button class="fw-nav-btn" type="button" aria-expanded="false" aria-controls="services-menu" data-services-toggle>
+              <svg class="icon fw-nav-icon" width="16" height="16" stroke-width="1.75" aria-hidden="true"><use href="#icon-settings"></use></svg>
+              <span class="fw-nav-label-row">
+                <span class="fw-nav-label">Services</span>
+                <svg class="icon fw-nav-chevron" width="10" height="10" stroke-width="3" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
+              </span>
+            </button>
+
+            <!-- Services mega menu: the 16 FEED services, shown for reference only (no links) -->
+            <div class="fw-services-dropdown" id="services-menu" hidden>
+              <div class="fw-services-dropdown-spacer" aria-hidden="true"></div>
+              <ul class="srv-cards-grid" aria-label="FEED services">
+                <li class="srv-card"><span class="srv-card-badge color-green">01</span><div class="srv-card-content"><span class="srv-icon-circle color-green"><img class="srv-card-image" src="assets/images/menu/krushi-yeva-jayate.png" alt="" loading="lazy" width="320" height="320"></span><span class="srv-card-text-area"><span class="srv-card-name">KRUSHI YEVA JAYATE</span></span></div></li>
+                <li class="srv-card"><span class="srv-card-badge color-green-light">02</span><div class="srv-card-content"><span class="srv-icon-circle color-green-light"><img class="srv-card-image" src="assets/images/menu/yuva-krushi.svg" alt="" loading="lazy" width="150" height="150"></span><span class="srv-card-text-area"><span class="srv-card-name">YUVA KRUSHI</span></span></div></li>
+                <li class="srv-card"><span class="srv-card-badge color-blue">03</span><div class="srv-card-content"><span class="srv-icon-circle color-blue"><img class="srv-card-image" src="assets/images/menu/buyers-connection.avif" alt="" loading="lazy" width="1024" height="1024"></span><span class="srv-card-text-area"><span class="srv-card-name">MY ORG</span></span></div></li>
+                <li class="srv-card"><span class="srv-card-badge color-teal">04</span><div class="srv-card-content"><span class="srv-icon-circle color-teal"><img class="srv-card-image" src="assets/images/menu/country-selection.avif" alt="" loading="lazy" width="1024" height="1024"></span><span class="srv-card-text-area"><span class="srv-card-name">MY EXPORTS</span></span></div></li>
+                <li class="srv-card"><span class="srv-card-badge color-yellow">05</span><div class="srv-card-content"><span class="srv-icon-circle color-yellow"><img class="srv-card-image" src="assets/images/menu/finance.avif" alt="" loading="lazy" width="1024" height="1024"></span><span class="srv-card-text-area"><span class="srv-card-name">LOANS &amp; FINANCE</span></span></div></li>
+                <li class="srv-card"><span class="srv-card-badge color-orange">06</span><div class="srv-card-content"><span class="srv-icon-circle color-orange"><img class="srv-card-image" src="assets/images/menu/product-selection.avif" alt="" loading="lazy" width="1024" height="1024"></span><span class="srv-card-text-area"><span class="srv-card-name">PRODUCT 360</span></span></div></li>
+                <li class="srv-card"><span class="srv-card-badge color-purple">07</span><div class="srv-card-content"><span class="srv-icon-circle color-purple"><img class="srv-card-image" src="assets/images/menu/process-order.avif" alt="" loading="lazy" width="1024" height="1024"></span><span class="srv-card-text-area"><span class="srv-card-name">MY BUSINESS</span></span></div></li>
+                <li class="srv-card"><span class="srv-card-badge color-pink">08</span><div class="srv-card-content"><span class="srv-icon-circle color-pink"><img class="srv-card-image" src="assets/images/menu/documentation.avif" alt="" loading="lazy" width="1024" height="1024"></span><span class="srv-card-text-area"><span class="srv-card-name">MY EDUCATION</span></span></div></li>
+                <li class="srv-card"><span class="srv-card-badge color-blue-light">09</span><div class="srv-card-content"><span class="srv-icon-circle color-blue-light"><img class="srv-card-image" src="assets/images/menu/why-exports.avif" alt="" loading="lazy" width="1024" height="1024"></span><span class="srv-card-text-area"><span class="srv-card-name">FEED WORLD</span></span></div></li>
+                <li class="srv-card"><span class="srv-card-badge color-green-light">10</span><div class="srv-card-content"><span class="srv-icon-circle color-green-light"><img class="srv-card-image" src="assets/images/menu/start-exports.avif" alt="" loading="lazy" width="1024" height="1024"></span><span class="srv-card-text-area"><span class="srv-card-name">EPM</span></span></div></li>
+                <li class="srv-card"><span class="srv-card-badge color-orange-light">11</span><div class="srv-card-content"><span class="srv-icon-circle color-orange-light"><img class="srv-card-image" src="assets/images/menu/trade-updates.avif" alt="" loading="lazy" width="1024" height="1024"></span><span class="srv-card-text-area"><span class="srv-card-name">TRADE FAIRS</span></span></div></li>
+                <li class="srv-card"><span class="srv-card-badge color-teal">12</span><div class="srv-card-content"><span class="srv-icon-circle color-teal"><img class="srv-card-image" src="assets/images/menu/policies.avif" alt="" loading="lazy" width="1024" height="1024"></span><span class="srv-card-text-area"><span class="srv-card-name">SAFE MISSION</span></span></div></li>
+                <li class="srv-card"><span class="srv-card-badge color-purple-light">13</span><div class="srv-card-content"><span class="srv-icon-circle color-purple-light"><img class="srv-card-image" src="assets/images/menu/tools-services.avif" alt="" loading="lazy" width="1024" height="1024"></span><span class="srv-card-text-area"><span class="srv-card-name">MY TOOLS</span></span></div></li>
+                <li class="srv-card"><span class="srv-card-badge color-yellow">14</span><div class="srv-card-content"><span class="srv-icon-circle color-yellow"><img class="srv-card-image" src="assets/images/menu/policies.avif" alt="" loading="lazy" width="1024" height="1024"></span><span class="srv-card-text-area"><span class="srv-card-name">KNOW YOUR SCHEMES</span></span></div></li>
+                <li class="srv-card"><span class="srv-card-badge color-orange">15</span><div class="srv-card-content"><span class="srv-icon-circle color-orange"><img class="srv-card-image" src="assets/images/menu/product-selection.avif" alt="" loading="lazy" width="1024" height="1024"></span><span class="srv-card-text-area"><span class="srv-card-name">MY MARKET</span></span></div></li>
+                <li class="srv-card"><span class="srv-card-badge color-blue">16</span><div class="srv-card-content"><span class="srv-icon-circle color-blue"><img class="srv-card-image" src="assets/images/menu/tariffs.avif" alt="" loading="lazy" width="1024" height="1024"></span><span class="srv-card-text-area"><span class="srv-card-name">FEED CARD</span></span></div></li>
+              </ul>
+            </div>
+          </li>
+          <li class="fw-nav-item">
+            <a class="fw-nav-btn" href="#" data-route="events">
+              <svg class="icon fw-nav-icon" width="16" height="16" stroke-width="1.75" aria-hidden="true"><use href="#icon-calendar"></use></svg>
+              <span class="fw-nav-label-row"><span class="fw-nav-label">Events &amp; Updates</span></span>
+            </a>
+          </li>
+          <li class="fw-nav-item">
+            <a class="fw-nav-btn" href="#" data-route="roadmap">
+              <svg class="icon fw-nav-icon" width="16" height="16" stroke-width="1.75" aria-hidden="true"><use href="#icon-map"></use></svg>
+              <span class="fw-nav-label-row"><span class="fw-nav-label">Export Road Map</span></span>
+            </a>
+          </li>
+          <li class="fw-nav-item">
+            <a class="fw-nav-btn" href="#" data-route="how">
+              <svg class="icon fw-nav-icon" width="16" height="16" stroke-width="1.75" aria-hidden="true"><use href="#icon-activity"></use></svg>
+              <span class="fw-nav-label-row"><span class="fw-nav-label">How Feed Works</span></span>
+            </a>
+          </li>
+          <li class="fw-nav-item">
+            <a class="fw-nav-btn" href="#" data-route="fpo">
+              <svg class="icon fw-nav-icon" width="16" height="16" stroke-width="1.75" aria-hidden="true"><use href="#icon-users"></use></svg>
+              <span class="fw-nav-label-row"><span class="fw-nav-label">FPO</span></span>
+            </a>
+          </li>
+          <li class="fw-nav-item">
+            <a class="fw-nav-btn" href="#" data-route="exports">
+              <svg class="icon fw-nav-icon" width="16" height="16" stroke-width="1.75" aria-hidden="true"><use href="#icon-package"></use></svg>
+              <span class="fw-nav-label-row"><span class="fw-nav-label">Exports</span></span>
+            </a>
+          </li>
+          <li class="fw-nav-item">
+            <a class="fw-nav-btn" href="#" data-route="contact">
+              <svg class="icon fw-nav-icon" width="16" height="16" stroke-width="1.75" aria-hidden="true"><use href="#icon-phone-call"></use></svg>
+              <span class="fw-nav-label-row"><span class="fw-nav-label">Contact Us</span></span>
+            </a>
+          </li>
+        </ul>
+
+        <span class="fw-navbar-divider fw-navbar-divider--actions" aria-hidden="true"></span>
+
+        <div class="fw-navbar-actions">
+          <!-- Notifications -->
+          <div class="nb-wrap" data-notifications>
+            <button class="nb-bell" type="button" aria-expanded="false" aria-controls="notifications-panel" aria-label="Notifications, 2 new" data-notifications-toggle>
+              <svg class="icon" width="16" height="16" stroke-width="2.25" aria-hidden="true"><use href="#icon-bell"></use></svg>
+              <span class="nb-badge" data-notifications-badge aria-hidden="true">2</span>
+            </button>
+            <div class="nb-panel" id="notifications-panel" role="region" aria-labelledby="notifications-title" hidden>
+              <div class="nb-head">
+                <h2 class="nb-title" id="notifications-title">Notifications</h2>
+                <span class="nb-new-pill" data-notifications-pill>2 new</span>
+              </div>
+              <ul class="nb-list">
+                <li>
+                  <a class="nb-item is-unread" href="#" data-route="epm">
+                    <span class="nb-icon is-green"><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#icon-megaphone"></use></svg></span>
+                    <span class="nb-body">
+                      <strong>EPM registrations are open</strong>
+                      <span>The next district meet is on 15 Dec. Register to take part.</span>
+                      <small><time datetime="2026-11-11T09:00">2 hours ago</time></small>
+                    </span>
+                    <span class="nb-dot"><span class="visually-hidden">New</span></span>
+                  </a>
+                </li>
+                <li>
+                  <a class="nb-item is-unread" href="#" data-route="feedworld">
+                    <span class="nb-icon is-purple"><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#icon-book-open"></use></svg></span>
+                    <span class="nb-body">
+                      <strong>FEED World - Nov Edition is out</strong>
+                      <span>Markets, trends and success stories from India and abroad.</span>
+                      <small><time datetime="2026-11-10T10:00">1 day ago</time></small>
+                    </span>
+                    <span class="nb-dot"><span class="visually-hidden">New</span></span>
+                  </a>
+                </li>
+                <li>
+                  <a class="nb-item" href="#" data-route="safe-mission">
+                    <span class="nb-icon is-orange"><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#icon-alarm-clock"></use></svg></span>
+                    <span class="nb-body">
+                      <strong>Safe Mission guidelines released</strong>
+                      <span>Read the new guidelines before your next farm visit.</span>
+                      <small><time datetime="2026-11-08T10:00">3 days ago</time></small>
+                    </span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <button class="fw-search-btn" type="button" aria-label="Search" data-action="search">
+            <svg class="icon" width="15" height="15" stroke-width="2.25" aria-hidden="true"><use href="#icon-search"></use></svg>
+          </button>
+
+          <!-- My Account -->
+          <div class="fw-account-wrap" data-account>
+            <button class="fw-account-btn" type="button" aria-expanded="false" aria-controls="account-menu" data-account-toggle>
+              <span class="fw-account-icon" aria-hidden="true">
+                <svg class="icon" width="13" height="13" stroke-width="2.5"><use href="#icon-user"></use></svg>
+              </span>
+              <span class="fw-account-label">My Account</span>
+            </button>
+            <div class="fw-account-dropdown" id="account-menu" hidden>
+              <div class="fw-account-summary">
+                <button class="fw-account-avatar-edit" type="button" aria-label="Change profile picture" data-avatar-pick>
+                  <span class="fw-account-avatar" data-avatar>
+                    <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#icon-user"></use></svg>
+                  </span>
+                  <span class="fw-account-avatar-edit-badge" aria-hidden="true">
+                    <svg class="icon" width="11" height="11"><use href="#icon-camera"></use></svg>
+                  </span>
+                </button>
+                <div class="fw-account-meta">
+                  <p class="fw-account-name">FEED Member</p>
+                  <p class="fw-account-email">member@example.com</p>
+                </div>
+                <input class="visually-hidden" type="file" accept="image/png,image/jpeg,image/webp,image/gif" tabindex="-1" aria-hidden="true" data-avatar-input>
+              </div>
+              <ul class="fw-account-actions">
+                <li>
+                  <a class="fw-account-action fw-account-action--current" href="#home" aria-current="page">
+                    <svg class="icon" width="14" height="14" aria-hidden="true"><use href="#icon-layout-dashboard"></use></svg>
+                    Dashboard
+                  </a>
+                </li>
+                <li>
+                  <button class="fw-account-action" type="button" aria-haspopup="dialog" aria-controls="devices-dialog" data-devices-open>
+                    <svg class="icon" width="14" height="14" aria-hidden="true"><use href="#icon-laptop"></use></svg>
+                    Devices
+                  </button>
+                </li>
+                <li>
+                  <button class="fw-account-action fw-account-action--danger" type="button" data-action="logout">
+                    <svg class="icon" width="14" height="14" aria-hidden="true"><use href="#icon-log-out"></use></svg>
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="fw-hamburger" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu" data-mobile-toggle>
+        <svg class="icon" width="20" height="20" aria-hidden="true"><use href="#icon-menu"></use></svg>
+      </button>
+    </nav>
+
+    <!-- Mobile / tablet site menu (below 1200px) -->
+    <div class="fw-mobile-backdrop" data-mobile-backdrop hidden></div>
+    <div class="fw-mobile-panel" id="mobile-menu" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title" hidden>
+      <div class="fw-mobile-header">
+        <div class="fw-mobile-header-brand">
+          <span class="fw-mobile-logo-badge"><img src="assets/images/brand/feed-logo.avif" alt="" width="30" height="30"></span>
+          <h2 class="fw-mobile-header-title" id="mobile-menu-title">FEED MSCS LTD</h2>
+        </div>
+        <button class="fw-mobile-close" type="button" aria-label="Close menu" data-mobile-close>
+          <svg class="icon" width="20" height="20" aria-hidden="true"><use href="#icon-x"></use></svg>
+        </button>
+      </div>
+
+      <nav aria-label="Site">
+        <ul class="fw-mobile-nav">
+          <li class="fw-mobile-nav-item">
+            <a class="fw-mobile-nav-btn" href="#" data-route="home">
+              <span class="fw-mobile-nav-icon-chip chip-orange"><svg class="icon" width="18" height="18" aria-hidden="true"><use href="#icon-house"></use></svg></span>
+              <span class="fw-mobile-nav-label">Home</span>
+            </a>
+          </li>
+          <li class="fw-mobile-nav-item">
+            <a class="fw-mobile-nav-btn" href="#" data-route="about">
+              <span class="fw-mobile-nav-icon-chip chip-orange"><svg class="icon" width="18" height="18" aria-hidden="true"><use href="#icon-building"></use></svg></span>
+              <span class="fw-mobile-nav-label">About Us</span>
+            </a>
+          </li>
+          <li class="fw-mobile-nav-item" data-mobile-services>
+            <button class="fw-mobile-nav-btn" type="button" aria-expanded="false" aria-controls="mobile-services" data-mobile-services-toggle>
+              <span class="fw-mobile-nav-icon-chip chip-yellow"><svg class="icon" width="18" height="18" aria-hidden="true"><use href="#icon-settings"></use></svg></span>
+              <span class="fw-mobile-nav-label">Services</span>
+              <svg class="icon fw-mobile-chevron" width="18" height="18" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
+            </button>
+            <!-- FEED services, shown for reference only (no links) -->
+            <ul class="fw-mobile-submenu" id="mobile-services" hidden>
+              <li class="fw-mobile-submenu-item"><img src="assets/images/menu/krushi-yeva-jayate.png" alt="" loading="lazy" width="320" height="320">KRUSHI YEVA JAYATE</li>
+              <li class="fw-mobile-submenu-item"><img src="assets/images/menu/yuva-krushi.svg" alt="" loading="lazy" width="150" height="150">YUVA KRUSHI</li>
+              <li class="fw-mobile-submenu-item"><img src="assets/images/menu/buyers-connection.avif" alt="" loading="lazy" width="1024" height="1024">MY ORG</li>
+              <li class="fw-mobile-submenu-item"><img src="assets/images/menu/country-selection.avif" alt="" loading="lazy" width="1024" height="1024">MY EXPORTS</li>
+              <li class="fw-mobile-submenu-item"><img src="assets/images/menu/finance.avif" alt="" loading="lazy" width="1024" height="1024">LOANS &amp; FINANCE</li>
+              <li class="fw-mobile-submenu-item"><img src="assets/images/menu/product-selection.avif" alt="" loading="lazy" width="1024" height="1024">PRODUCT 360</li>
+              <li class="fw-mobile-submenu-item"><img src="assets/images/menu/process-order.avif" alt="" loading="lazy" width="1024" height="1024">MY BUSINESS</li>
+              <li class="fw-mobile-submenu-item"><img src="assets/images/menu/documentation.avif" alt="" loading="lazy" width="1024" height="1024">MY EDUCATION</li>
+              <li class="fw-mobile-submenu-item"><img src="assets/images/menu/why-exports.avif" alt="" loading="lazy" width="1024" height="1024">FEED WORLD</li>
+              <li class="fw-mobile-submenu-item"><img src="assets/images/menu/start-exports.avif" alt="" loading="lazy" width="1024" height="1024">EPM</li>
+              <li class="fw-mobile-submenu-item"><img src="assets/images/menu/trade-updates.avif" alt="" loading="lazy" width="1024" height="1024">TRADE FAIRS</li>
+              <li class="fw-mobile-submenu-item"><img src="assets/images/menu/policies.avif" alt="" loading="lazy" width="1024" height="1024">SAFE MISSION</li>
+              <li class="fw-mobile-submenu-item"><img src="assets/images/menu/tools-services.avif" alt="" loading="lazy" width="1024" height="1024">MY TOOLS</li>
+              <li class="fw-mobile-submenu-item"><img src="assets/images/menu/policies.avif" alt="" loading="lazy" width="1024" height="1024">KNOW YOUR SCHEMES</li>
+              <li class="fw-mobile-submenu-item"><img src="assets/images/menu/product-selection.avif" alt="" loading="lazy" width="1024" height="1024">MY MARKET</li>
+              <li class="fw-mobile-submenu-item"><img src="assets/images/menu/tariffs.avif" alt="" loading="lazy" width="1024" height="1024">FEED CARD</li>
+            </ul>
+          </li>
+          <li class="fw-mobile-nav-item">
+            <a class="fw-mobile-nav-btn" href="#" data-route="events">
+              <span class="fw-mobile-nav-icon-chip chip-yellow"><svg class="icon" width="18" height="18" aria-hidden="true"><use href="#icon-calendar"></use></svg></span>
+              <span class="fw-mobile-nav-label">Events &amp; Updates</span>
+            </a>
+          </li>
+          <li class="fw-mobile-nav-item">
+            <a class="fw-mobile-nav-btn" href="#" data-route="roadmap">
+              <span class="fw-mobile-nav-icon-chip chip-lime"><svg class="icon" width="18" height="18" aria-hidden="true"><use href="#icon-map"></use></svg></span>
+              <span class="fw-mobile-nav-label">Export Road Map</span>
+            </a>
+          </li>
+          <li class="fw-mobile-nav-item">
+            <a class="fw-mobile-nav-btn" href="#" data-route="how">
+              <span class="fw-mobile-nav-icon-chip chip-green"><svg class="icon" width="18" height="18" aria-hidden="true"><use href="#icon-activity"></use></svg></span>
+              <span class="fw-mobile-nav-label">How Feed Works</span>
+            </a>
+          </li>
+          <li class="fw-mobile-nav-item">
+            <a class="fw-mobile-nav-btn" href="#" data-route="fpo">
+              <span class="fw-mobile-nav-icon-chip chip-green"><svg class="icon" width="18" height="18" aria-hidden="true"><use href="#icon-users"></use></svg></span>
+              <span class="fw-mobile-nav-label">FPO</span>
+            </a>
+          </li>
+          <li class="fw-mobile-nav-item">
+            <a class="fw-mobile-nav-btn" href="#" data-route="exports">
+              <span class="fw-mobile-nav-icon-chip chip-emerald"><svg class="icon" width="18" height="18" aria-hidden="true"><use href="#icon-package"></use></svg></span>
+              <span class="fw-mobile-nav-label">Exports</span>
+            </a>
+          </li>
+          <li class="fw-mobile-nav-item">
+            <a class="fw-mobile-nav-btn" href="#" data-route="contact">
+              <span class="fw-mobile-nav-icon-chip chip-emerald"><svg class="icon" width="18" height="18" aria-hidden="true"><use href="#icon-phone-call"></use></svg></span>
+              <span class="fw-mobile-nav-label">Contact Us</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="fw-mobile-footer">
+        <button class="fw-mobile-search" type="button" data-action="search">
+          <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#icon-search"></use></svg>
+          Search
+        </button>
+        <a class="fw-mobile-login" href="#home" aria-current="page" data-mobile-close>Dashboard</a>
+        <div class="fw-mobile-account">
+          <button class="fw-mobile-account-link" type="button" aria-haspopup="dialog" aria-controls="devices-dialog" data-devices-open>
+            <svg class="icon" width="15" height="15" aria-hidden="true"><use href="#icon-laptop"></use></svg>
+            Devices
+          </button>
+          <button class="fw-mobile-account-link fw-mobile-account-link--danger" type="button" data-action="logout">
+            <svg class="icon" width="15" height="15" aria-hidden="true"><use href="#icon-log-out"></use></svg>
+            Logout
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- =====================================================================
+       DASHBOARD
+       Grid areas - desktop (1200px+): left column | hero over the main content.
+                    below 1200px: toolbar, hero, left column cards, main content (one column);
+                    the dashboard menu becomes a slide-in drawer.
+       ===================================================================== -->
+  <main class="db-layout" id="main-content" tabindex="-1" data-view="home">
+
+    <!-- Toolbar: dashboard menu button + breadcrumb (below 1200px only) -->
+    <div class="db-toolbar">
+      <button class="db-menu-toggle" type="button" aria-expanded="false" aria-controls="db-sidebar" data-sidebar-toggle>
+        <svg class="icon" width="18" height="18" aria-hidden="true"><use href="#icon-panel-left"></use></svg>
+        <span>Dashboard menu</span>
+      </button>
+      <nav class="db-breadcrumb" aria-label="Breadcrumb">
+        <ol data-breadcrumb>
+          <li><a href="#" data-route="home">Home</a></li>
+          <li><span aria-current="page">My Dashboard</span></li>
+        </ol>
+      </nav>
+    </div>
+
+    <!-- Welcome banner: the greeting, FEED logo on the right -->
+    <section class="db-hero" aria-labelledby="welcome-title" data-hero data-view-panel="home">
+      <div class="db-hero-welcome" data-hero-welcome>
+        <h1 class="db-hero-welcome-title" id="welcome-title" tabindex="-1" data-view-focus>
+          <span class="db-hero-welcome-hi">Welcome,</span>
+          <span class="db-hero-welcome-name" data-user-name>FEED Member</span>
+        </h1>
+        <img class="db-hero-welcome-swoosh" src="assets/images/dashboard/art/hero-swoosh.svg" alt="" width="170" height="24">
+      </div>
+
+      <div class="db-hero-logo">
+        <span class="db-hero-logo-glow" aria-hidden="true"></span>
+        <img src="assets/images/brand/feed-logo.avif" alt="FEED MSCS LTD" width="240" height="240">
+      </div>
+    </section>
+
+    <!-- LEFT COLUMN: FEED Updates, dashboard menu, account overview -->
+    <div class="db-left-col">
+
+      <!-- FEED Updates: rolls upwards endlessly (widgets.js clones the list for a seamless loop) -->
+      <section class="db-updates" aria-labelledby="feed-updates-title">
+        <div class="db-updates-head">
+          <img class="db-updates-wave" src="assets/images/dashboard/art/feed-updates-wave.svg" alt="" width="340" height="112">
+          <span class="db-updates-head-icon" aria-hidden="true">
+            <svg class="icon" width="22" height="22"><use href="#icon-announce"></use></svg>
+          </span>
+          <h2 class="db-updates-title" id="feed-updates-title">FEED Updates</h2>
+          <a class="db-updates-see-all" href="#db-alerts">
+            See All
+            <svg class="icon" width="13" height="13" stroke-width="2.6" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
+          </a>
+        </div>
+        <div class="db-updates-window">
+          <ul class="db-updates-list" data-marquee="updates">
+            <li>
+              <a class="db-update-item" href="#" data-route="epm">
+                <span class="db-update-icon is-green"><svg class="icon" width="18" height="18" stroke-width="2.2" aria-hidden="true"><use href="#icon-calendar-days"></use></svg></span>
+                <span class="db-update-text">EPM Registrations Open –<br>Next Meet on Dec 15</span>
+                <svg class="icon db-update-arrow" width="20" height="20" stroke-width="2.4" aria-hidden="true"><use href="#icon-chevron-right"></use></svg>
+              </a>
+            </li>
+            <li>
+              <a class="db-update-item" href="#" data-route="safe-mission">
+                <span class="db-update-icon is-orange"><svg class="icon" width="18" height="18" stroke-width="2.2" aria-hidden="true"><use href="#icon-file-text"></use></svg></span>
+                <span class="db-update-text">Safe Mission – New<br>Guidelines Released</span>
+                <svg class="icon db-update-arrow" width="20" height="20" stroke-width="2.4" aria-hidden="true"><use href="#icon-chevron-right"></use></svg>
+              </a>
+            </li>
+            <li>
+              <a class="db-update-item" href="#" data-route="feedworld">
+                <span class="db-update-icon is-purple"><svg class="icon" width="18" height="18" stroke-width="2.2" aria-hidden="true"><use href="#icon-globe"></use></svg></span>
+                <span class="db-update-text">FEED World – Nov Edition<br>Now Available</span>
+                <svg class="icon db-update-arrow" width="20" height="20" stroke-width="2.4" aria-hidden="true"><use href="#icon-chevron-right"></use></svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Dashboard menu: a card on desktop, a slide-in drawer below 1200px (sidebar.js) -->
+      <aside class="db-sidebar" id="db-sidebar" aria-label="Dashboard menu" data-sidebar>
+        <div class="db-sidebar-head">
+          <h2 class="db-sidebar-heading" id="db-sidebar-heading">Dashboard menu</h2>
+          <button class="db-sidebar-close" type="button" aria-label="Close dashboard menu" data-sidebar-close>
+            <svg class="icon" width="20" height="20" aria-hidden="true"><use href="#icon-x"></use></svg>
+          </button>
+        </div>
+
+        <nav class="db-nav" aria-label="Dashboard sections">
+          <ul class="db-nav-list">
+            <li class="db-nav-entry is-blue">
+              <a class="db-nav-item is-active" href="#home" aria-current="page">
+                <svg class="icon db-nav-icon" width="20" height="20" stroke-width="2.1" aria-hidden="true"><use href="#icon-house"></use></svg>
+                <span class="db-nav-title">Home</span>
+              </a>
+            </li>
+
+            <li class="db-nav-entry is-slate">
+              <button class="db-nav-item" type="button" aria-expanded="false" aria-controls="db-nav-profile">
+                <svg class="icon db-nav-icon" width="20" height="20" stroke-width="2.1" aria-hidden="true"><use href="#icon-user"></use></svg>
+                <span class="db-nav-title">My Profile</span>
+                <svg class="icon db-nav-arrow" width="16" height="16" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
+              </button>
+              <ul class="db-nav-sublist" id="db-nav-profile" hidden>
+                <li><a class="db-nav-subitem" href="#profile-details"><svg class="icon db-nav-icon" width="15" height="15" aria-hidden="true"><use href="#icon-user"></use></svg><span class="db-nav-title">My Details</span></a></li>
+                <li><a class="db-nav-subitem" href="#profile-products"><svg class="icon db-nav-icon" width="15" height="15" aria-hidden="true"><use href="#icon-package"></use></svg><span class="db-nav-title">My Products</span></a></li>
+                <li><a class="db-nav-subitem" href="#profile-vendors"><svg class="icon db-nav-icon" width="15" height="15" aria-hidden="true"><use href="#icon-users"></use></svg><span class="db-nav-title">My Vendors</span></a></li>
+                <li><a class="db-nav-subitem" href="#profile-subscriptions"><svg class="icon db-nav-icon" width="15" height="15" aria-hidden="true"><use href="#icon-settings"></use></svg><span class="db-nav-title">Active Subscriptions</span></a></li>
+              </ul>
+            </li>
+
+            <li class="db-nav-entry is-indigo">
+              <button class="db-nav-item" type="button" aria-expanded="false" aria-controls="db-nav-org">
+                <svg class="icon db-nav-icon" width="20" height="20" stroke-width="2.1" aria-hidden="true"><use href="#icon-users"></use></svg>
+                <span class="db-nav-title">MY Org</span>
+                <svg class="icon db-nav-arrow" width="16" height="16" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
+              </button>
+              <ul class="db-nav-sublist" id="db-nav-org" hidden>
+                <li><a class="db-nav-subitem" href="#org-about"><svg class="icon db-nav-icon" width="15" height="15" aria-hidden="true"><use href="#icon-info"></use></svg><span class="db-nav-title">About My Org</span></a></li>
+                <li>
+                  <button class="db-nav-subitem" type="button" aria-expanded="false" aria-controls="db-nav-org-members">
+                    <svg class="icon db-nav-icon" width="15" height="15" aria-hidden="true"><use href="#icon-users-round"></use></svg>
+                    <span class="db-nav-title">My Members</span>
+                    <svg class="icon db-nav-arrow" width="16" height="16" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
+                  </button>
+                  <ul class="db-nav-sublist" id="db-nav-org-members" hidden>
+                    <li><a class="db-nav-subitem" href="#org-members-share-capital"><svg class="icon db-nav-icon" width="15" height="15" aria-hidden="true"><use href="#icon-arrow-right-left"></use></svg><span class="db-nav-title">Share Capital Registry - All Options</span></a></li>
+                    <li><a class="db-nav-subitem" href="#org-members-ledger"><svg class="icon db-nav-icon" width="15" height="15" aria-hidden="true"><use href="#icon-scroll-text"></use></svg><span class="db-nav-title">Member Ledger</span></a></li>
+                  </ul>
+                </li>
+                <li><a class="db-nav-subitem" href="#org-agm"><svg class="icon db-nav-icon" width="15" height="15" aria-hidden="true"><use href="#icon-calendar"></use></svg><span class="db-nav-title">AGM &amp; BoD Meetings</span></a></li>
+                <li><a class="db-nav-subitem" href="#org-farm-activity"><svg class="icon db-nav-icon" width="15" height="15" aria-hidden="true"><use href="#icon-sprout"></use></svg><span class="db-nav-title">Farm Activity</span></a></li>
+                <li><a class="db-nav-subitem" href="#org-schemes"><svg class="icon db-nav-icon" width="15" height="15" aria-hidden="true"><use href="#icon-shield-check"></use></svg><span class="db-nav-title">Schemes</span></a></li>
+                <li><a class="db-nav-subitem" href="#org-loans"><svg class="icon db-nav-icon" width="15" height="15" aria-hidden="true"><use href="#icon-banknote"></use></svg><span class="db-nav-title">Loans &amp; Finance</span></a></li>
+              </ul>
+            </li>
+
+            <li class="db-nav-entry is-orange">
+              <button class="db-nav-item" type="button" aria-expanded="false" aria-controls="db-nav-accounts">
+                <svg class="icon db-nav-icon" width="20" height="20" stroke-width="2.1" aria-hidden="true"><use href="#icon-layers"></use></svg>
+                <span class="db-nav-title">My Accounts</span>
+                <svg class="icon db-nav-arrow" width="16" height="16" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
+              </button>
+              <ul class="db-nav-sublist" id="db-nav-accounts" hidden>
+                <li>
+                  <button class="db-nav-subitem" type="button" aria-expanded="false" aria-controls="db-nav-accounts-registers">
+                    <svg class="icon db-nav-icon" width="15" height="15" aria-hidden="true"><use href="#icon-scroll-text"></use></svg>
+                    <span class="db-nav-title">My Registers</span>
+                    <svg class="icon db-nav-arrow" width="16" height="16" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
+                  </button>
+                  <ul class="db-nav-sublist" id="db-nav-accounts-registers" hidden>
+                    <li><a class="db-nav-subitem" href="#accounts-registers-purchase"><svg class="icon db-nav-icon" width="15" height="15" aria-hidden="true"><use href="#icon-clipboard-list"></use></svg><span class="db-nav-title">Purchase Registry</span></a></li>
+                    <li><a class="db-nav-subitem" href="#accounts-registers-sales"><svg class="icon db-nav-icon" width="15" height="15" aria-hidden="true"><use href="#icon-trending-up"></use></svg><span class="db-nav-title">Sales Registry</span></a></li>
+                    <li><a class="db-nav-subitem" href="#accounts-registers-stock"><svg class="icon db-nav-icon" width="15" height="15" aria-hidden="true"><use href="#icon-warehouse"></use></svg><span class="db-nav-title">Stock Registry</span></a></li>
+                  </ul>
+                </li>
+                <li>
+                  <button class="db-nav-subitem" type="button" aria-expanded="false" aria-controls="db-nav-accounts-transactions">
+                    <svg class="icon db-nav-icon" width="15" height="15" aria-hidden="true"><use href="#icon-arrow-right-left"></use></svg>
+                    <span class="db-nav-title">My Transactions</span>
+                    <svg class="icon db-nav-arrow" width="16" height="16" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
+                  </button>
+                  <ul class="db-nav-sublist" id="db-nav-accounts-transactions" hidden>
+                    <li><a class="db-nav-subitem" href="#accounts-transactions-cashbook"><svg class="icon db-nav-icon" width="15" height="15" aria-hidden="true"><use href="#icon-wallet"></use></svg><span class="db-nav-title">Cash Book Registry</span></a></li>
+                    <li><a class="db-nav-subitem" href="#accounts-transactions-bank"><svg class="icon db-nav-icon" width="15" height="15" aria-hidden="true"><use href="#icon-landmark"></use></svg><span class="db-nav-title">Bank Registry</span></a></li>
+                    <li><a class="db-nav-subitem" href="#accounts-transactions-expenses"><svg class="icon db-nav-icon" width="15" height="15" aria-hidden="true"><use href="#icon-receipt"></use></svg><span class="db-nav-title">Expenses Registry</span></a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+
+            <li class="db-nav-entry is-rose">
+              <button class="db-nav-item" type="button" aria-expanded="false" aria-controls="db-nav-reports">
+                <svg class="icon db-nav-icon" width="20" height="20" stroke-width="2.1" aria-hidden="true"><use href="#icon-chart-column"></use></svg>
+                <span class="db-nav-title">My Reports</span>
+                <svg class="icon db-nav-arrow" width="16" height="16" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
+              </button>
+              <ul class="db-nav-sublist" id="db-nav-reports" hidden>
+                <li><a class="db-nav-subitem" href="#reports-ledger"><svg class="icon db-nav-icon" width="15" height="15" aria-hidden="true"><use href="#icon-scroll-text"></use></svg><span class="db-nav-title">Ledger Registry</span></a></li>
+                <li><a class="db-nav-subitem" href="#reports-financial"><svg class="icon db-nav-icon" width="15" height="15" aria-hidden="true"><use href="#icon-file-text"></use></svg><span class="db-nav-title">Financial Reports</span></a></li>
+              </ul>
+            </li>
+
+            <li class="db-nav-entry is-green">
+              <a class="db-nav-item" href="#status">
+                <svg class="icon db-nav-icon" width="20" height="20" stroke-width="2.1" aria-hidden="true"><use href="#icon-activity"></use></svg>
+                <span class="db-nav-title">Status of Activities</span>
+              </a>
+            </li>
+
+            <li class="db-nav-entry is-green">
+              <a class="db-nav-item" href="#compliances">
+                <svg class="icon db-nav-icon" width="20" height="20" stroke-width="2.1" aria-hidden="true"><use href="#icon-shield-check"></use></svg>
+                <span class="db-nav-title">My Compliances</span>
+              </a>
+            </li>
+
+            <li class="db-nav-entry is-emerald">
+              <button class="db-nav-item" type="button" aria-expanded="false" aria-controls="db-nav-connections">
+                <svg class="icon db-nav-icon" width="20" height="20" stroke-width="2.1" aria-hidden="true"><use href="#icon-users-round"></use></svg>
+                <span class="db-nav-title">My Connections</span>
+                <svg class="icon db-nav-arrow" width="16" height="16" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
+              </button>
+              <ul class="db-nav-sublist" id="db-nav-connections" hidden>
+                <li><a class="db-nav-subitem" href="#trade-connections-export"><svg class="icon db-nav-icon" width="15" height="15" aria-hidden="true"><use href="#icon-earth"></use></svg><span class="db-nav-title">Export Connections - International Buyers</span></a></li>
+                <li><a class="db-nav-subitem" href="#trade-connections-domestic"><svg class="icon db-nav-icon" width="15" height="15" aria-hidden="true"><use href="#icon-users"></use></svg><span class="db-nav-title">Domestic Connections - My Market Trade Buyers (Vendors)</span></a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+
+        <img class="db-sidebar-art" src="assets/images/dashboard/art/sidebar-art.svg" alt="" width="340" height="210" loading="lazy">
+      </aside>
+
+      <!-- Account overview: ERS, Krishi Coins, Plan -->
+      <section class="db-summary-grid" aria-labelledby="overview-title">
+        <h2 class="visually-hidden" id="overview-title">Account overview</h2>
+
+        <!-- ERS -->
+        <article class="db-summary-card db-ers-card" aria-labelledby="ers-title" data-ers-card>
+          <div class="db-ers-header">
+            <img class="db-ers-header-wave" src="assets/images/dashboard/art/ers-header-wave.svg" alt="" width="340" height="120">
+            <div class="db-ers-icon" aria-hidden="true">
+              <svg class="icon" width="22" height="22" stroke-width="2.2"><use href="#icon-users"></use></svg>
+            </div>
+            <span class="db-ers-divider" aria-hidden="true"></span>
+            <div class="db-ers-heading">
+              <h3 class="db-ers-title" id="ers-title">ERS</h3>
+              <p class="db-ers-subtitle">Empowerment &amp; Rural Support</p>
+            </div>
+            <span class="db-ers-badge"><span class="db-ers-badge-dot" aria-hidden="true"></span>Active</span>
+          </div>
+
+          <div class="db-ers-sheet">
+            <div class="db-ers-body">
+              <div class="db-ers-progress-col">
+                <div class="db-ers-hex" aria-hidden="true">
+                  <img class="db-ers-hex-shape" src="assets/images/dashboard/art/ers-hex.svg" alt="" width="100" height="110">
+                  <svg class="icon" width="22" height="22" stroke-width="2.2"><use href="#icon-users"></use></svg>
+                </div>
+                <div class="db-ers-encourage">
+                  <span class="db-ers-eyebrow">ERS Testing</span>
+                  <span class="db-ers-encourage-title">Let's Begin!</span>
+                </div>
+              </div>
+              <div class="db-ers-status-col">
+                <span class="db-ers-status-eyebrow">Assessment Status</span>
+                <span class="db-ers-status-pill is-pending">
+                  <svg class="icon" width="15" height="15" stroke-width="2.4" aria-hidden="true"><use href="#icon-clock"></use></svg>
+                  Not Started
+                </span>
+              </div>
+            </div>
+            <a class="db-ers-cta" href="#ers">
+              <span class="db-ers-cta-text">Start Assessment</span>
+              <span class="db-ers-cta-arrow" aria-hidden="true"><svg class="icon" width="17" height="17" stroke-width="2.6"><use href="#icon-arrow-right"></use></svg></span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Krishi Coins -->
+        <article class="db-summary-card db-coins2-card" aria-labelledby="coins-title">
+          <div class="db-premium-glow db-coins2-glow-a" aria-hidden="true"></div>
+          <div class="db-premium-glow db-coins2-glow-b" aria-hidden="true"></div>
+
+          <div class="db-premium-header">
+            <div class="db-premium-icon-wrap db-coins2-icon-wrap" aria-hidden="true">
+              <svg class="icon" width="21" height="21" stroke-width="2.2"><use href="#icon-hand-coins"></use></svg>
+            </div>
+            <div class="db-premium-heading">
+              <h3 class="db-premium-title" id="coins-title">Krishi Coins</h3>
+              <p class="db-premium-subtitle">Your rewards balance</p>
+            </div>
+          </div>
+
+          <div class="db-coins2-body">
+            <div class="db-coins2-balance-col">
+              <p class="db-coins2-balance">
+                <span class="db-coins2-balance-value" data-count-to="12450">12,450</span>
+                <span class="db-coins2-balance-label">Krishi Coins</span>
+              </p>
+              <p class="db-coins2-growth">
+                <svg class="icon" width="11" height="11" aria-hidden="true"><use href="#icon-trending-up"></use></svg>
+                +320 this month
+              </p>
+            </div>
+            <div class="db-coin-stack" aria-hidden="true">
+              <div class="db-coin-stack-glow"></div>
+              <span class="db-coin-sparkle"></span>
+              <div class="db-coin db-coin-back"></div>
+              <div class="db-coin db-coin-dot"></div>
+              <div class="db-coin db-coin-main"><span>&#8377;</span></div>
+              <div class="db-coin db-coin-small"><span>&#8377;</span></div>
+            </div>
+          </div>
+
+          <div class="db-coins2-footer">
+            <span class="db-premium-hint">Redeem for discounts &amp; inputs</span>
+            <button class="db-premium-cta db-coins2-cta" type="button" data-action="coins-redeem">
+              <span class="db-premium-cta-text"><strong>Redeem Now</strong></span>
+              <span class="db-premium-cta-circle" aria-hidden="true"><svg class="icon" width="13" height="13"><use href="#icon-arrow-right"></use></svg></span>
+            </button>
+          </div>
+        </article>
+
+        <!-- Plan -->
+        <article class="db-summary-card db-card-plan" aria-labelledby="plan-title">
+          <div class="db-plan-corner-ribbon" aria-hidden="true">Gold</div>
+          <div class="db-plan-main">
+            <div class="db-summary-left">
+              <div class="db-summary-icon-wrap" aria-hidden="true">
+                <svg class="icon" width="24" height="24" stroke-width="1.8" fill="currentColor"><use href="#icon-crown"></use></svg>
+              </div>
+              <div>
+                <h3 class="db-summary-title" id="plan-title">Plan</h3>
+                <p class="db-summary-subtitle">3 Months Plan</p>
+              </div>
+            </div>
+            <div class="db-plan-actions">
+              <span class="db-plan-tier-badge">
+                <svg class="icon" width="13" height="13" stroke-width="1.8" fill="currentColor" aria-hidden="true"><use href="#icon-star"></use></svg>
+                Gold
+              </span>
+              <a class="db-upgrade-btn" href="#plans">
+                Manage Plan
+                <svg class="icon" width="15" height="15" aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
+              </a>
+            </div>
+          </div>
+          <div class="db-summary-bar-track" role="presentation"><div class="db-summary-bar-fill"></div></div>
+        </article>
+      </section>
+    </div>
+
+    <!-- MAIN COLUMN: one view at a time (router.js) - Home, My Profile, Status of Activities, ERS, Plans -->
+    <div class="db-main">
+
+      <!-- =================================================================
+           VIEW: Home  (#home, and the menu sections that have no page of their own)
+           ================================================================= -->
+      <div class="db-view db-view--home" id="view-home" data-view-panel="home">
+
+        <!-- FEED Services: shown for reference only - the cards do not link anywhere -->
+        <section class="home-services home-services--noAnt db-services" id="db-services" aria-labelledby="services-title" data-reveal>
+          <div class="home-services-stage">
+            <div class="home-services-main">
+              <div class="home-services-head">
+                <div class="home-services-titlebar">
+                  <span class="home-services-rule" aria-hidden="true"></span>
+                  <h2 class="home-services-title" id="services-title"><span>FEED</span> Services</h2>
+                  <span class="home-services-rule" aria-hidden="true"></span>
+                </div>
+              </div>
+
+              <div class="home-services-grid">
+                <ul class="home-services-row" role="list">
+                  <li class="home-service-card" style="--i: 0">
+                    <div class="home-service-box"><div class="home-service-face">
+                      <h3 class="home-service-name">MY ORG</h3>
+                      <span class="home-service-divider" aria-hidden="true"></span>
+                      <div class="home-service-body">
+                        <img class="home-service-icon is-padded" src="assets/images/services/my-org.jpg" alt="" loading="lazy" decoding="async" width="800" height="800">
+                        <p class="home-service-desc">Complete organizational management covering accounts, compliance, reports, and more</p>
+                      </div>
+                    </div></div>
+                  </li>
+                  <li class="home-service-card" style="--i: 1">
+                    <div class="home-service-box"><div class="home-service-face">
+                      <h3 class="home-service-name">MY BUSINESS</h3>
+                      <span class="home-service-divider" aria-hidden="true"></span>
+                      <div class="home-service-body">
+                        <img class="home-service-icon" src="assets/images/services/my-business.webp" alt="" loading="lazy" decoding="async" width="1536" height="1024">
+                        <p class="home-service-desc">Manage business operations, track performance, and identify growth opportunities</p>
+                      </div>
+                    </div></div>
+                  </li>
+                  <li class="home-service-card" style="--i: 2">
+                    <div class="home-service-box"><div class="home-service-face">
+                      <h3 class="home-service-name">MY EXPORTS</h3>
+                      <span class="home-service-divider" aria-hidden="true"></span>
+                      <div class="home-service-body">
+                        <img class="home-service-icon" src="assets/images/services/my-exports.webp" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+                        <p class="home-service-desc">Step-by-step guidance through the complete export process</p>
+                      </div>
+                    </div></div>
+                  </li>
+                  <li class="home-service-card" style="--i: 3">
+                    <div class="home-service-box"><div class="home-service-face">
+                      <h3 class="home-service-name">KRUSHI YEVA JAYATE</h3>
+                      <span class="home-service-divider" aria-hidden="true"></span>
+                      <div class="home-service-body">
+                        <img class="home-service-icon" src="assets/images/services/krushi-yeva-jayate.webp" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+                        <p class="home-service-desc">Practical, step-by-step export execution with simplified options and real-time notifications</p>
+                      </div>
+                    </div></div>
+                  </li>
+                </ul>
+                <ul class="home-services-row" role="list">
+                  <li class="home-service-card" style="--i: 4">
+                    <div class="home-service-box"><div class="home-service-face">
+                      <h3 class="home-service-name">PRODUCT 360</h3>
+                      <span class="home-service-divider" aria-hidden="true"></span>
+                      <div class="home-service-body">
+                        <img class="home-service-icon" src="assets/images/services/product-360.webp" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+                        <p class="home-service-desc">Comprehensive guide of a product—from seed selection to export quality compliance</p>
+                      </div>
+                    </div></div>
+                  </li>
+                  <li class="home-service-card" style="--i: 5">
+                    <div class="home-service-box"><div class="home-service-face">
+                      <h3 class="home-service-name">SAFE MISSION</h3>
+                      <span class="home-service-divider" aria-hidden="true"></span>
+                      <div class="home-service-body">
+                        <img class="home-service-icon" src="assets/images/services/safe-mission.webp" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+                        <p class="home-service-desc">A structured pathway to sustainable farming, quality production, export readiness, and market access</p>
+                      </div>
+                    </div></div>
+                  </li>
+                  <li class="home-service-card" style="--i: 6">
+                    <div class="home-service-box"><div class="home-service-face">
+                      <h3 class="home-service-name">MY MARKET</h3>
+                      <span class="home-service-divider" aria-hidden="true"></span>
+                      <div class="home-service-body">
+                        <img class="home-service-icon is-wide" src="assets/images/services/my-market.webp" alt="" loading="lazy" decoding="async" width="2602" height="1252">
+                        <p class="home-service-desc">A B2B marketplace that connects businesses with buyers and expands access to new markets</p>
+                      </div>
+                    </div></div>
+                  </li>
+                  <li class="home-service-card" style="--i: 7">
+                    <div class="home-service-box"><div class="home-service-face">
+                      <h3 class="home-service-name">EPM</h3>
+                      <span class="home-service-divider" aria-hidden="true"></span>
+                      <div class="home-service-body">
+                        <img class="home-service-icon" src="assets/images/services/epm.webp" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+                        <p class="home-service-desc">A district-level institutional platform that builds export awareness and activates the district’s pathway to global markets</p>
+                      </div>
+                    </div></div>
+                  </li>
+                </ul>
+                <ul class="home-services-row" role="list">
+                  <li class="home-service-card" style="--i: 8">
+                    <div class="home-service-box"><div class="home-service-face">
+                      <h3 class="home-service-name">TRADE FAIRS</h3>
+                      <span class="home-service-divider" aria-hidden="true"></span>
+                      <div class="home-service-body">
+                        <img class="home-service-icon" src="assets/images/services/trade-fairs.webp" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+                        <p class="home-service-desc">Discover domestic and international trade fairs, buyer–seller meets, and reverse buyer–seller meets worldwide</p>
+                      </div>
+                    </div></div>
+                  </li>
+                  <li class="home-service-card" style="--i: 9">
+                    <div class="home-service-box"><div class="home-service-face">
+                      <h3 class="home-service-name">MY EDUCATION</h3>
+                      <span class="home-service-divider" aria-hidden="true"></span>
+                      <div class="home-service-body">
+                        <img class="home-service-icon" src="assets/images/services/my-education.webp" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+                        <p class="home-service-desc">Practical skill oriented courses to make you market-ready entrepreneurs</p>
+                      </div>
+                    </div></div>
+                  </li>
+                  <li class="home-service-card" style="--i: 10">
+                    <div class="home-service-box"><div class="home-service-face">
+                      <h3 class="home-service-name">FEED WORLD</h3>
+                      <span class="home-service-divider" aria-hidden="true"></span>
+                      <div class="home-service-body">
+                        <img class="home-service-icon" src="assets/images/services/feed-world.webp" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+                        <p class="home-service-desc">A monthly publication covering Indian and international markets, trends, innovations, initiatives, opportunities, and success stories</p>
+                      </div>
+                    </div></div>
+                  </li>
+                  <li class="home-service-card" style="--i: 11">
+                    <div class="home-service-box"><div class="home-service-face">
+                      <h3 class="home-service-name">FEED CARD</h3>
+                      <span class="home-service-divider" aria-hidden="true"></span>
+                      <div class="home-service-body">
+                        <img class="home-service-icon" src="assets/images/services/feed-card.webp" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+                        <p class="home-service-desc">A reward-based discount card offering benefits across multiple categories through Krishi Coins</p>
+                      </div>
+                    </div></div>
+                  </li>
+                </ul>
+                <ul class="home-services-row" role="list">
+                  <li class="home-service-card" style="--i: 12">
+                    <div class="home-service-box"><div class="home-service-face">
+                      <h3 class="home-service-name">MY TOOLS</h3>
+                      <span class="home-service-divider" aria-hidden="true"></span>
+                      <div class="home-service-body">
+                        <img class="home-service-icon" src="assets/images/services/my-tools.webp" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+                        <p class="home-service-desc">Handy tools for quick and easy access to essential resources</p>
+                      </div>
+                    </div></div>
+                  </li>
+                  <li class="home-service-card" style="--i: 13">
+                    <div class="home-service-box"><div class="home-service-face">
+                      <h3 class="home-service-name">KNOW YOUR SCHEMES</h3>
+                      <span class="home-service-divider" aria-hidden="true"></span>
+                      <div class="home-service-body">
+                        <img class="home-service-icon" src="assets/images/services/know-your-schemes.webp" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+                        <p class="home-service-desc">Access Central and State Government schemes through one unified platform</p>
+                      </div>
+                    </div></div>
+                  </li>
+                  <li class="home-service-card" style="--i: 14">
+                    <div class="home-service-box"><div class="home-service-face">
+                      <h3 class="home-service-name">LOANS &amp; FINANCE</h3>
+                      <span class="home-service-divider" aria-hidden="true"></span>
+                      <div class="home-service-body">
+                        <img class="home-service-icon" src="assets/images/services/loans-finance.webp" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+                        <p class="home-service-desc">Connect with trusted financial partners and access tailored solutions for every financial need</p>
+                      </div>
+                    </div></div>
+                  </li>
+                  <li class="home-service-card" style="--i: 15">
+                    <div class="home-service-box"><div class="home-service-face">
+                      <h3 class="home-service-name">YUVA KRISHI</h3>
+                      <span class="home-service-divider" aria-hidden="true"></span>
+                      <div class="home-service-body">
+                        <img class="home-service-icon" src="assets/images/services/yuva-krishi.webp" alt="" loading="lazy" decoding="async" width="1254" height="1254">
+                        <p class="home-service-desc">A pathway for young professionals to become agripreneurs</p>
+                      </div>
+                    </div></div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Quick Access - Frequently Used -->
+        <section class="db-quick-actions" aria-labelledby="quick-access-title">
+          <div class="db-section-header">
+            <span class="db-section-line" aria-hidden="true"></span>
+            <h2 class="db-section-title" id="quick-access-title">Quick Access – Frequently Used</h2>
+          </div>
+          <ul class="db-actions-grid">
+            <li>
+              <a class="db-action-card bg-pastel-green" href="#profile-details">
+                <img class="db-action-img" src="assets/images/quick-access/farmer-profile.avif" alt="" width="90" height="90" loading="lazy">
+                <h3 class="db-action-title">Update<br>My Profile</h3>
+                <span class="db-action-btn bg-dark-green" aria-hidden="true"><svg class="icon" width="18" height="18"><use href="#icon-chevron-right"></use></svg></span>
+              </a>
+            </li>
+            <li>
+              <a class="db-action-card bg-pastel-blue" href="#profile-products">
+                <img class="db-action-img" src="assets/images/quick-access/veg-produce.avif" alt="" width="90" height="90" loading="lazy">
+                <h3 class="db-action-title">Add<br>Product / Service</h3>
+                <span class="db-action-btn bg-dark-blue" aria-hidden="true"><svg class="icon" width="18" height="18"><use href="#icon-chevron-right"></use></svg></span>
+              </a>
+            </li>
+            <li>
+              <a class="db-action-card bg-pastel-orange" href="#org-members-share-capital">
+                <img class="db-action-img" src="assets/images/quick-access/people-group.avif" alt="" width="90" height="90" loading="lazy">
+                <h3 class="db-action-title">View<br>Members</h3>
+                <span class="db-action-btn bg-dark-orange" aria-hidden="true"><svg class="icon" width="18" height="18"><use href="#icon-chevron-right"></use></svg></span>
+              </a>
+            </li>
+            <li>
+              <a class="db-action-card bg-pastel-purple" href="#reports-financial">
+                <img class="db-action-img" src="assets/images/quick-access/chart-report.avif" alt="" width="90" height="90" loading="lazy">
+                <h3 class="db-action-title">View<br>Reports</h3>
+                <span class="db-action-btn bg-dark-purple" aria-hidden="true"><svg class="icon" width="18" height="18"><use href="#icon-chevron-right"></use></svg></span>
+              </a>
+            </li>
+            <li>
+              <a class="db-action-card bg-pastel-pink" href="#db-alerts">
+                <img class="db-action-img" src="assets/images/quick-access/megaphone.avif" alt="" width="90" height="90" loading="lazy">
+                <h3 class="db-action-title">News &amp;<br>Alerts</h3>
+                <span class="db-action-btn bg-dark-pink" aria-hidden="true"><svg class="icon" width="18" height="18"><use href="#icon-chevron-right"></use></svg></span>
+              </a>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Widgets: Central & State Updates, Recent Activity, Market Prices -->
+        <section class="db-widgets-grid" aria-label="Updates, activity and market prices">
+
+          <!-- Central & State Updates (widgets.js clones the list for the endless scroll) -->
+          <article class="db-widget-card db-widget--alerts" id="db-alerts" aria-labelledby="alerts-title">
+            <header class="db-widget-header">
+              <div class="db-widget-title">
+                <svg class="icon db-widget-title-icon" width="24" height="24" aria-hidden="true"><use href="#icon-bell"></use></svg>
+                <span class="db-widget-title-rule" aria-hidden="true"></span>
+                <h2 id="alerts-title">Central &amp; State Updates</h2>
+              </div>
+            </header>
+            <div class="db-widget-content">
+              <ul class="db-alert-list" data-marquee="alerts">
+                <li class="db-alert-item">
+                  <div class="db-alert-icon is-green" aria-hidden="true"><svg class="icon" width="24" height="24" stroke-width="2.2"><use href="#icon-megaphone"></use></svg></div>
+                  <div class="db-alert-info">
+                    <div class="db-alert-title-row">
+                      <div class="db-alert-title-group">
+                        <span class="db-alert-tag">New</span>
+                        <h3>New Subsidy Scheme Announced</h3>
+                      </div>
+                      <span class="db-alert-time">2 hours ago</span>
+                    </div>
+                    <p>Get up to 50% subsidy on drip irrigation equipment.</p>
+                  </div>
+                </li>
+                <li class="db-alert-item">
+                  <div class="db-alert-icon is-orange" aria-hidden="true"><svg class="icon" width="24" height="24" stroke-width="2.2"><use href="#icon-graduation-cap"></use></svg></div>
+                  <div class="db-alert-info">
+                    <div class="db-alert-title-row">
+                      <div class="db-alert-title-group">
+                        <h3>Training Program Update</h3>
+                      </div>
+                      <span class="db-alert-time">5 hours ago</span>
+                    </div>
+                    <p>Farmers Training Program scheduled on 28&nbsp;May.</p>
+                  </div>
+                </li>
+                <li class="db-alert-item">
+                  <div class="db-alert-icon is-blue" aria-hidden="true"><svg class="icon" width="24" height="24" stroke-width="2.2"><use href="#icon-info"></use></svg></div>
+                  <div class="db-alert-info">
+                    <div class="db-alert-title-row">
+                      <div class="db-alert-title-group">
+                        <h3>Market Update</h3>
+                      </div>
+                      <span class="db-alert-time">1 day ago</span>
+                    </div>
+                    <p>Wheat prices increased by 2.4% in your region.</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <footer class="db-widget-footer">
+              <a class="db-widget-btn" href="#">View All Updates <svg class="icon" width="24" height="24" stroke-width="2.4" aria-hidden="true"><use href="#icon-arrow-right"></use></svg></a>
+            </footer>
+            <img class="db-widget-scene" src="assets/images/dashboard/widgets/updates-scene.webp" alt="" loading="lazy" width="988" height="359">
+          </article>
+
+          <!-- Recent Activity -->
+          <article class="db-widget-card db-widget--activity" aria-labelledby="activity-title">
+            <header class="db-widget-header">
+              <div class="db-widget-title">
+                <svg class="icon db-widget-title-icon" width="24" height="24" stroke-width="2.4" aria-hidden="true"><use href="#icon-activity"></use></svg>
+                <span class="db-widget-title-rule" aria-hidden="true"></span>
+                <h2 id="activity-title">Recent Activity</h2>
+              </div>
+            </header>
+            <div class="db-widget-content">
+              <ul class="db-activity-list" data-marquee="activity">
+                <li class="db-activity-item">
+                  <div class="db-activity-icon is-purple" aria-hidden="true"><svg class="icon" width="24" height="24"><use href="#icon-file-text"></use></svg></div>
+                  <div class="db-activity-info">
+                    <div class="db-activity-top"><h3>Report Generated</h3><span>2 days ago</span></div>
+                    <p>Monthly report for April generated</p>
+                  </div>
+                </li>
+                <li class="db-activity-item">
+                  <div class="db-activity-icon is-blue" aria-hidden="true"><svg class="icon" width="24" height="24"><use href="#icon-user"></use></svg></div>
+                  <div class="db-activity-info">
+                    <div class="db-activity-top"><h3>Profile Updated</h3><span>2 hours ago</span></div>
+                    <p>You updated your profile information</p>
+                  </div>
+                </li>
+                <li class="db-activity-item">
+                  <div class="db-activity-icon is-green" aria-hidden="true"><svg class="icon" width="24" height="24"><use href="#icon-package"></use></svg></div>
+                  <div class="db-activity-info">
+                    <div class="db-activity-top"><h3>Product Added</h3><span>5 hours ago</span></div>
+                    <p>You added new product: Organic Wheat</p>
+                  </div>
+                </li>
+                <li class="db-activity-item">
+                  <div class="db-activity-icon is-orange" aria-hidden="true"><svg class="icon" width="24" height="24"><use href="#icon-users"></use></svg></div>
+                  <div class="db-activity-info">
+                    <div class="db-activity-top"><h3>New Member Joined</h3><span>1 day ago</span></div>
+                    <p>Ramesh Kumar joined your organization</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <footer class="db-widget-footer">
+              <a class="db-widget-btn" href="#">View All Activity <svg class="icon" width="24" height="24" stroke-width="2.4" aria-hidden="true"><use href="#icon-arrow-right"></use></svg></a>
+            </footer>
+            <img class="db-widget-scene" src="assets/images/dashboard/widgets/recent-activity-scene.webp" alt="" loading="lazy" width="1031" height="414">
+          </article>
+
+          <!-- Market Prices -->
+          <article class="db-mp-card" aria-labelledby="market-title">
+            <div class="db-mp">
+              <header class="db-mp-head">
+                <svg class="icon db-mp-head-icon" width="26" height="22" stroke-width="2.6" aria-hidden="true"><use href="#icon-bars"></use></svg>
+                <span class="db-mp-head-rule" aria-hidden="true"></span>
+                <h2 id="market-title">Market Prices</h2>
+              </header>
+              <div class="db-mp-table" role="table" aria-labelledby="market-title">
+                <div class="db-mp-cols" role="row">
+                  <span role="columnheader">Commodity</span>
+                  <span role="columnheader">Price (₹/Q)</span>
+                  <span role="columnheader">Change</span>
+                </div>
+                <div class="db-mp-row" role="row">
+                  <span class="db-mp-art" aria-hidden="true"><img src="assets/images/dashboard/widgets/market/mustard.jpg" alt="" width="132" height="110" loading="lazy" decoding="async"></span>
+                  <span class="db-mp-name" role="cell">Mustard</span>
+                  <span class="db-mp-price" role="cell">₹5,400</span>
+                  <span class="db-mp-change is-up" role="cell"><svg class="icon" width="12" height="12" stroke-width="2.8" aria-hidden="true"><use href="#icon-trend-up"></use></svg>+4.2%</span>
+                </div>
+                <div class="db-mp-row" role="row">
+                  <span class="db-mp-art" aria-hidden="true"><img src="assets/images/dashboard/widgets/market/wheat.jpg" alt="" width="132" height="110" loading="lazy" decoding="async"></span>
+                  <span class="db-mp-name" role="cell">Wheat</span>
+                  <span class="db-mp-price" role="cell">₹2,200</span>
+                  <span class="db-mp-change is-up" role="cell"><svg class="icon" width="12" height="12" stroke-width="2.8" aria-hidden="true"><use href="#icon-trend-up"></use></svg>+2.4%</span>
+                </div>
+                <div class="db-mp-row" role="row">
+                  <span class="db-mp-art" aria-hidden="true"><img src="assets/images/dashboard/widgets/market/rice.jpg" alt="" width="132" height="110" loading="lazy" decoding="async"></span>
+                  <span class="db-mp-name" role="cell">Rice (Paddy)</span>
+                  <span class="db-mp-price" role="cell">₹2,100</span>
+                  <span class="db-mp-change is-down" role="cell"><svg class="icon" width="12" height="12" stroke-width="2.8" aria-hidden="true"><use href="#icon-trend-down"></use></svg>-1.2%</span>
+                </div>
+                <div class="db-mp-row" role="row">
+                  <span class="db-mp-art" aria-hidden="true"><img src="assets/images/dashboard/widgets/market/soyabean.jpg" alt="" width="132" height="110" loading="lazy" decoding="async"></span>
+                  <span class="db-mp-name" role="cell">Soyabean</span>
+                  <span class="db-mp-price" role="cell">₹4,500</span>
+                  <span class="db-mp-change is-up" role="cell"><svg class="icon" width="12" height="12" stroke-width="2.8" aria-hidden="true"><use href="#icon-trend-up"></use></svg>+3.8%</span>
+                </div>
+              </div>
+              <footer class="db-mp-foot">
+                <img class="db-mp-scene" src="assets/images/dashboard/widgets/market/scene.jpg" alt="" width="760" height="442" loading="lazy" decoding="async">
+                <a class="db-mp-button" href="#">
+                  <span>View Full Market</span>
+                  <svg class="icon" width="14" height="14" stroke-width="2.6" aria-hidden="true"><use href="#icon-arrow-right-short"></use></svg>
+                </a>
+              </footer>
+            </div>
+          </article>
+        </section>
+      </div>
+
+      <!-- =================================================================
+           VIEW: My Profile  (#profile-details, #profile-products, #profile-vendors, #profile-subscriptions)
+           ================================================================= -->
+      <section class="db-view db-profile" id="view-profile" data-view-panel="profile" aria-label="My Profile" hidden>
+        <nav class="db-profile-tabs" aria-label="My Profile sections">
+          <a class="db-profile-tab tab-indigo" href="#profile-details"><svg class="icon" width="18" height="18" aria-hidden="true"><use href="#icon-user"></use></svg>My Details</a>
+          <a class="db-profile-tab tab-green" href="#profile-products"><svg class="icon" width="18" height="18" aria-hidden="true"><use href="#icon-package"></use></svg>My Products</a>
+          <a class="db-profile-tab tab-orange" href="#profile-vendors"><svg class="icon" width="18" height="18" aria-hidden="true"><use href="#icon-users"></use></svg>My Vendors</a>
+          <a class="db-profile-tab tab-teal" href="#profile-subscriptions"><svg class="icon" width="18" height="18" aria-hidden="true"><use href="#icon-settings"></use></svg>Active Subscriptions</a>
+        </nav>
+
+        <!-- My Details -->
+        <div class="db-profile-panel" data-profile-panel="profile-details">
+          <form class="mdf-wrapper" action="#" method="post" novalidate data-my-details>
+            <div class="mdf-header">
+              <div>
+                <h2 class="mdf-title" tabindex="-1" data-view-focus>My Details</h2>
+                <p class="mdf-subtitle">Keep your organization's identity, statutory and banking information up to date.</p>
+              </div>
+              <div class="mdf-completeness">
+                <div class="mdf-ring" style="--pct: 9" data-mdf-ring><span data-mdf-pct>9%</span></div>
+                <div class="mdf-completeness-text">
+                  <strong>Profile strength</strong>
+                  <span data-mdf-strength>A few details are missing</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mdf-grid">
+              <!-- Organization Identity -->
+              <section class="mdf-card mdf-card-wide" aria-labelledby="mdf-identity-title">
+                <div class="mdf-card-head">
+                  <span class="mdf-card-icon indigo" aria-hidden="true"><svg class="icon" width="18" height="18"><use href="#icon-building"></use></svg></span>
+                  <div>
+                    <h3 id="mdf-identity-title">Organization Identity</h3>
+                    <p>Your public-facing name, logo and website</p>
+                  </div>
+                </div>
+                <div class="mdf-identity-row">
+                  <button class="mdf-logo-upload" type="button" aria-label="Upload organization logo" data-upload-trigger="logo">
+                    <span class="mdf-upload-preview" data-upload-preview="logo">
+                      <svg class="icon" width="22" height="22" aria-hidden="true"><use href="#icon-camera"></use></svg>
+                      <span>Upload Logo</span>
+                    </span>
+                    <span class="mdf-logo-edit-badge" aria-hidden="true"><svg class="icon" width="13" height="13"><use href="#icon-camera"></use></svg></span>
+                  </button>
+                  <input type="file" accept="image/*" hidden data-upload-input="logo">
+                  <div class="mdf-identity-fields">
+                    <label class="mdf-field">
+                      <span>Organization Name</span>
+                      <input type="text" name="name" value="Green Valley Farmers Producer Company" placeholder="Enter your organization name" autocomplete="organization">
+                    </label>
+                    <label class="mdf-field">
+                      <span>Website</span>
+                      <span class="mdf-input-icon">
+                        <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#icon-globe"></use></svg>
+                        <input type="url" name="website" placeholder="https://yourcooperative.com" autocomplete="url">
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Statutory Details -->
+              <section class="mdf-card" aria-labelledby="mdf-statutory-title">
+                <div class="mdf-card-head">
+                  <span class="mdf-card-icon violet" aria-hidden="true"><svg class="icon" width="18" height="18"><use href="#icon-file-badge"></use></svg></span>
+                  <div>
+                    <h3 id="mdf-statutory-title">Statutory Details</h3>
+                    <p>GST, PAN &amp; registration certificate</p>
+                  </div>
+                </div>
+                <label class="mdf-field">
+                  <span>GST No.</span>
+                  <input type="text" name="gstNo" placeholder="22AAAAA0000A1Z5" maxlength="15" autocapitalize="characters" data-uppercase>
+                </label>
+                <label class="mdf-field">
+                  <span>PAN</span>
+                  <input type="text" name="pan" placeholder="AAAAA0000A" maxlength="10" autocapitalize="characters" data-uppercase>
+                </label>
+                <div class="mdf-field">
+                  <span id="mdf-cert-label">Registration Certificate</span>
+                  <div class="mdf-file-chip" data-cert-chip hidden>
+                    <svg class="icon" width="15" height="15" aria-hidden="true"><use href="#icon-file-text"></use></svg>
+                    <span class="mdf-file-chip-name" data-cert-name></span>
+                    <span class="mdf-file-chip-size" data-cert-size></span>
+                    <svg class="icon mdf-file-chip-check" width="15" height="15" aria-hidden="true"><use href="#icon-circle-check"></use></svg>
+                    <button class="mdf-file-chip-remove" type="button" aria-label="Remove registration certificate" data-cert-remove>
+                      <svg class="icon" width="13" height="13" aria-hidden="true"><use href="#icon-x"></use></svg>
+                    </button>
+                  </div>
+                  <button class="mdf-dropzone" type="button" aria-describedby="mdf-cert-label" data-upload-trigger="cert">
+                    <svg class="icon" width="18" height="18" aria-hidden="true"><use href="#icon-cloud-upload"></use></svg>
+                    <span>Click to upload PDF or image</span>
+                  </button>
+                  <input type="file" accept=".pdf,image/*" hidden data-upload-input="cert">
+                </div>
+              </section>
+
+              <!-- Bank Details -->
+              <section class="mdf-card" aria-labelledby="mdf-bank-title">
+                <div class="mdf-card-head">
+                  <span class="mdf-card-icon emerald" aria-hidden="true"><svg class="icon" width="18" height="18"><use href="#icon-landmark"></use></svg></span>
+                  <div>
+                    <h3 id="mdf-bank-title">Bank Details</h3>
+                    <p>For settlements and payouts</p>
+                  </div>
+                </div>
+                <label class="mdf-field">
+                  <span>Account Holder Name</span>
+                  <input type="text" name="accountHolder" placeholder="As per bank records" autocomplete="name">
+                </label>
+                <div class="mdf-field-row">
+                  <label class="mdf-field">
+                    <span>Account Number</span>
+                    <input type="text" name="accountNumber" placeholder="XXXXXXXXXXXX" inputmode="numeric" data-digits-only>
+                  </label>
+                  <label class="mdf-field">
+                    <span>IFSC Code</span>
+                    <input type="text" name="ifsc" placeholder="SBIN0001234" maxlength="11" autocapitalize="characters" data-uppercase>
+                  </label>
+                </div>
+                <label class="mdf-field">
+                  <span>Bank Name</span>
+                  <span class="mdf-input-icon">
+                    <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#icon-credit-card"></use></svg>
+                    <input type="text" name="bankName" placeholder="e.g. State Bank of India">
+                  </span>
+                </label>
+              </section>
+
+              <!-- Payment QR Code -->
+              <section class="mdf-card" aria-labelledby="mdf-qr-title">
+                <div class="mdf-card-head">
+                  <span class="mdf-card-icon rose" aria-hidden="true"><svg class="icon" width="18" height="18"><use href="#icon-qr-code"></use></svg></span>
+                  <div>
+                    <h3 id="mdf-qr-title">Payment QR Code</h3>
+                    <p>Shown to members &amp; buyers for quick payments</p>
+                  </div>
+                </div>
+                <button class="mdf-qr-upload" type="button" aria-label="Upload payment QR code" data-upload-trigger="qr">
+                  <span class="mdf-upload-preview" data-upload-preview="qr">
+                    <svg class="icon" width="30" height="30" aria-hidden="true"><use href="#icon-qr-code"></use></svg>
+                    <span>Upload QR Code</span>
+                    <small>PNG or JPG, up to 2MB</small>
+                  </span>
+                </button>
+                <input type="file" accept="image/*" hidden data-upload-input="qr">
+              </section>
+            </div>
+
+            <div class="mdf-action-bar">
+              <span class="mdf-action-hint"><svg class="icon" width="14" height="14" aria-hidden="true"><use href="#icon-sparkles"></use></svg> Changes are saved to your organization profile</span>
+              <div class="mdf-action-buttons">
+                <button class="mdf-btn-ghost" type="button" data-mdf-discard>Discard</button>
+                <button class="mdf-btn-primary" type="submit"><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#icon-save"></use></svg> Save Changes</button>
+              </div>
+            </div>
+
+            <div class="mdf-toast" role="status" data-mdf-toast>
+              <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg>
+              <span data-mdf-toast-text></span>
+            </div>
+          </form>
+        </div>
+
+        <!-- My Products / My Vendors / Active Subscriptions: content still to come, as in the React app -->
+        <div class="db-profile-panel" data-profile-panel="profile-products" hidden>
+          <h2 class="visually-hidden" tabindex="-1" data-view-focus>My Products</h2>
+          <div class="db-profile-empty"><p>Content will appear here</p></div>
+        </div>
+        <div class="db-profile-panel" data-profile-panel="profile-vendors" hidden>
+          <h2 class="visually-hidden" tabindex="-1" data-view-focus>My Vendors</h2>
+          <div class="db-profile-empty"><p>Content will appear here</p></div>
+        </div>
+        <div class="db-profile-panel" data-profile-panel="profile-subscriptions" hidden>
+          <h2 class="visually-hidden" tabindex="-1" data-view-focus>Active Subscriptions</h2>
+          <div class="db-profile-empty"><p>Content will appear here</p></div>
+        </div>
+      </section>
+
+      <!-- =================================================================
+           VIEW: Status of Activities  (#status) - the member's upcoming EPMs and volunteering.
+           The React app loads these from the API; these are sample entries (epm-activities.js).
+           ================================================================= -->
+      <section class="db-view" id="view-status" data-view-panel="status" aria-labelledby="status-title" hidden>
+        <div class="mea-page">
+          <header class="mea-welcome">
+            <div class="mea-welcome-icon" aria-hidden="true"><svg class="icon" width="22" height="22"><use href="#icon-megaphone"></use></svg></div>
+            <div class="mea-welcome-text">
+              <h2 id="status-title" tabindex="-1" data-view-focus>Welcome Back, <span data-user-name>FEED Member</span> <span aria-hidden="true">👋</span></h2>
+              <p>Here are your upcoming EPMs and volunteer activities with the latest updates.</p>
+            </div>
+            <div class="mea-today">
+              <svg class="icon" width="26" height="26" aria-hidden="true"><use href="#icon-calendar-days"></use></svg>
+              <div>
+                <small>Today</small>
+                <strong data-today-date>11 Nov 2026</strong>
+                <small data-today-day>Wednesday</small>
+              </div>
+            </div>
+          </header>
+
+          <!-- My Registered EPMs -->
+          <section class="mea-section mea-section-registration" aria-labelledby="mea-registrations-title">
+            <div class="mea-section-head">
+              <div class="mea-section-icon" aria-hidden="true"><svg class="icon" width="24" height="24"><use href="#icon-calendar-days"></use></svg></div>
+              <div class="mea-section-text">
+                <h3 id="mea-registrations-title">My Registered EPMs</h3>
+                <p>Upcoming EPM events you have registered for, with their latest updates.</p>
+              </div>
+              <a class="mea-link-btn" href="#" data-route="epm-details">View All EPMs <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#icon-arrow-right"></use></svg></a>
+            </div>
+
+            <div class="mea-cards">
+              <article class="mea-card is-open" id="mea-card-registrations-1">
+                <button class="mea-card-main" type="button" aria-expanded="true" aria-controls="mea-updates-1">
+                  <span class="mea-card-info">
+                    <span class="mea-card-title">Krishna District EPM – Vijayawada</span>
+                    <span class="mea-card-meta">
+                      <span><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#icon-calendar-days"></use></svg> 15 Dec 2026</span>
+                      <span><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#icon-clock"></use></svg> 10:00 AM – 1:00 PM</span>
+                    </span>
+                    <span class="mea-card-meta"><span><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#icon-map-pin"></use></svg> Tummalapalli Kalakshetram, Vijayawada, Andhra Pradesh</span></span>
+                    <span class="mea-chips"><span class="mea-chip mea-tone-amber">Venue changed</span></span>
+                  </span>
+                  <span class="mea-card-status">
+                    <span class="mea-badge mea-tone-green"><svg class="icon" width="18" height="18" aria-hidden="true"><use href="#icon-circle-check"></use></svg> Registered</span>
+                    <small>Registered on<br>2 Nov 2026</small>
+                  </span>
+                  <span class="mea-chevron" aria-hidden="true"><svg class="icon" width="20" height="20"><use href="#icon-chevron-down"></use></svg></span>
+                </button>
+                <div class="mea-updates" id="mea-updates-1">
+                  <div class="mea-updates-head">
+                    <span class="mea-updates-icon" aria-hidden="true"><svg class="icon" width="22" height="22"><use href="#icon-megaphone"></use></svg></span>
+                    <div>
+                      <strong>Updates for this EPM</strong>
+                      <small>Latest changes and important information.</small>
+                    </div>
+                  </div>
+                  <ol class="mea-timeline">
+                    <li class="mea-update mea-tone-rose">
+                      <time class="mea-update-when" datetime="2026-11-09T16:30">9 Nov 2026<br>04:30 PM</time>
+                      <span class="mea-update-dot" aria-hidden="true"></span>
+                      <span class="mea-update-icon" aria-hidden="true"><svg class="icon" width="18" height="18"><use href="#icon-map-pin"></use></svg></span>
+                      <span class="mea-update-tag">Venue Updated</span>
+                      <p class="mea-update-text">Venue has been changed from Siddhartha Auditorium to <strong>Tummalapalli Kalakshetram</strong>.</p>
+                    </li>
+                  </ol>
+                </div>
+              </article>
+
+              <article class="mea-card" id="mea-card-registrations-2">
+                <button class="mea-card-main" type="button" aria-expanded="false" aria-controls="mea-updates-2">
+                  <span class="mea-card-info">
+                    <span class="mea-card-title">Guntur District EPM – Guntur</span>
+                    <span class="mea-card-meta">
+                      <span><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#icon-calendar-days"></use></svg> 22 Jan 2027</span>
+                      <span><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#icon-clock"></use></svg> Time to be announced</span>
+                    </span>
+                    <span class="mea-card-meta"><span><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#icon-map-pin"></use></svg> Guntur, Andhra Pradesh</span></span>
+                    <span class="mea-chips"><span class="mea-chip mea-tone-green">On schedule</span></span>
+                  </span>
+                  <span class="mea-card-status">
+                    <span class="mea-badge mea-tone-green"><svg class="icon" width="18" height="18" aria-hidden="true"><use href="#icon-circle-check"></use></svg> Registered</span>
+                    <small>Registered on<br>8 Nov 2026</small>
+                  </span>
+                  <span class="mea-chevron" aria-hidden="true"><svg class="icon" width="20" height="20"><use href="#icon-chevron-down"></use></svg></span>
+                </button>
+                <div class="mea-updates" id="mea-updates-2" hidden>
+                  <div class="mea-updates-head">
+                    <span class="mea-updates-icon" aria-hidden="true"><svg class="icon" width="22" height="22"><use href="#icon-megaphone"></use></svg></span>
+                    <div>
+                      <strong>Updates for this EPM</strong>
+                      <small>Latest changes and important information.</small>
+                    </div>
+                  </div>
+                  <p class="mea-updates-none">No changes so far - this EPM will be held as scheduled.</p>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <!-- My Volunteer Registrations -->
+          <section class="mea-section mea-section-volunteer" aria-labelledby="mea-volunteers-title">
+            <div class="mea-section-head">
+              <div class="mea-section-icon" aria-hidden="true"><svg class="icon" width="24" height="24"><use href="#icon-heart-handshake"></use></svg></div>
+              <div class="mea-section-text">
+                <h3 id="mea-volunteers-title">My Volunteer Registrations</h3>
+                <p>Upcoming volunteer activities you have registered for, with their latest updates.</p>
+              </div>
+              <a class="mea-link-btn" href="#" data-route="epm-volunteer">Volunteer for an EPM <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#icon-arrow-right"></use></svg></a>
+            </div>
+            <div class="mea-empty">
+              <p>You're not volunteering at any upcoming EPM.</p>
+              <a class="mea-btn-outline" href="#" data-route="epm-volunteer">Become a volunteer <svg class="icon" width="14" height="14" aria-hidden="true"><use href="#icon-arrow-right"></use></svg></a>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <!-- =================================================================
+           VIEW: ERS - Export Readiness Assessment  (#ers)
+           The wizard and the results are drawn by ers-assessment.js from data/ers-data.js.
+           ================================================================= -->
+      <section class="db-view" id="view-ers" data-view-panel="ers" aria-labelledby="ers-panel-title" hidden>
+        <div class="ers-view">
+          <a class="ers-back-btn" href="#home" data-back-link>
+            <svg class="icon" width="17" height="17" aria-hidden="true"><use href="#icon-arrow-left"></use></svg> Back to Dashboard
+          </a>
+          <div class="ers-card">
+            <header class="ers-panel-header">
+              <div class="ers-header-title">
+                <div class="ers-header-icon" aria-hidden="true"><svg class="icon" width="20" height="20"><use href="#icon-shield-check"></use></svg></div>
+                <div>
+                  <h2 id="ers-panel-title" tabindex="-1" data-view-focus>Export Readiness Assessment</h2>
+                  <p>For FPOs, SHGs &amp; first-time exporters · 7 dimensions · ~8 minutes</p>
+                </div>
+              </div>
+            </header>
+            <div class="ers-stage" data-ers-stage>
+              <div class="ers-loading">
+                <svg class="icon ers-spin" width="22" height="22" aria-hidden="true"><use href="#icon-loader-circle"></use></svg>
+                <span>Loading your assessment…</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================
+           VIEW: Membership Plans  (#plans)
+           ================================================================= -->
+      <section class="db-view" id="view-plans" data-view-panel="plans" aria-labelledby="plans-title" hidden>
+        <div class="plans-view">
+          <a class="plans-back-btn" href="#home" data-back-link>
+            <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#icon-arrow-left"></use></svg> Back to Dashboard
+          </a>
+
+          <div class="plans-header-row">
+            <div class="plans-title">
+              <div class="plans-eyebrow"><svg class="icon" width="14" height="14" aria-hidden="true"><use href="#icon-sparkles"></use></svg> Membership Plans</div>
+              <h1 class="plans-heading" id="plans-title" tabindex="-1" data-view-focus>Choose the plan that grows with you</h1>
+              <p>Unlock more tools, higher limits and priority support for your organisation.</p>
+            </div>
+          </div>
+
+          <div class="plans-grid" data-plans>
+            <!-- Basic -->
+            <article class="plan-card plan-basic" aria-labelledby="plan-basic-name">
+              <div class="plan-card-header">
+                <div class="plan-icon-badge" aria-hidden="true"><svg class="icon" width="26" height="26"><use href="#icon-sprout"></use></svg></div>
+                <h3 class="plan-name" id="plan-basic-name">Basic</h3>
+                <p class="plan-tagline">Starter Plan</p>
+              </div>
+              <div class="plan-duration-chip"><svg class="icon" width="13" height="13" aria-hidden="true"><use href="#icon-calendar"></use></svg> 1 Month Plan</div>
+              <div class="plan-pricing">
+                <span class="plan-pricing-label">You pay</span>
+                <div class="plan-total-price"><span class="plan-currency">₹</span>499</div>
+              </div>
+              <div class="plan-services-count">10 Services Included</div>
+              <ul class="plan-feature-list">
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">Export Promotional Meetings</span><span class="plan-feature-tag tag-full">Full</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">FEED Card</span><span class="plan-feature-tag tag-full">Full</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">Know Your Schemes</span><span class="plan-feature-tag tag-full">Full</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">Krushi Yeva Jayate</span><span class="plan-feature-tag tag-full">Full</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">Loans &amp; Finance</span><span class="plan-feature-tag tag-full">Full</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">My Farm</span><span class="plan-feature-tag tag-limit">3 Farms</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">My Market</span><span class="plan-feature-tag tag-full">Full</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">My Products</span><span class="plan-feature-tag tag-limit">5 Products</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">Safe Mission</span><span class="plan-feature-tag tag-full">Full</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">Trade Fairs</span><span class="plan-feature-tag tag-full">Full</span></li>
+              </ul>
+              <button class="plan-cta-btn" type="button" data-plan-upgrade="Basic">Upgrade to Basic <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#icon-arrow-right"></use></svg></button>
+            </article>
+
+            <!-- Gold (current plan) -->
+            <article class="plan-card plan-gold plan-popular plan-current" aria-labelledby="plan-gold-name">
+              <div class="plan-ribbon"><svg class="icon" width="12" height="12" fill="currentColor" aria-hidden="true"><use href="#icon-star"></use></svg> Most Popular</div>
+              <div class="plan-card-header">
+                <div class="plan-icon-badge" aria-hidden="true"><svg class="icon" width="26" height="26"><use href="#icon-crown"></use></svg></div>
+                <h3 class="plan-name" id="plan-gold-name">Gold</h3>
+                <p class="plan-tagline">Popular Plan</p>
+              </div>
+              <div class="plan-duration-chip"><svg class="icon" width="13" height="13" aria-hidden="true"><use href="#icon-calendar"></use></svg> 3 Months Plan</div>
+              <div class="plan-pricing">
+                <span class="plan-pricing-label">Total you pay</span>
+                <div class="plan-total-price"><span class="plan-currency">₹</span>5,997</div>
+                <div class="plan-monthly-price">₹1,999 / month</div>
+                <div class="plan-save-badge">Save with bundle</div>
+              </div>
+              <div class="plan-services-count">14 Services Included</div>
+              <ul class="plan-feature-list">
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">Export Promotional Meetings</span><span class="plan-feature-tag tag-full">Full</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">FEED Card</span><span class="plan-feature-tag tag-full">Full</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">FEED World</span><span class="plan-feature-tag tag-full">Full</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">Know Your Schemes</span><span class="plan-feature-tag tag-full">Full</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">Krushi Yeva Jayate</span><span class="plan-feature-tag tag-full">Full</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">Loans &amp; Finance</span><span class="plan-feature-tag tag-full">Full</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">My Business</span><span class="plan-feature-tag tag-full">Full</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">My Education</span><span class="plan-feature-tag tag-full">Full</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">My Farm</span><span class="plan-feature-tag tag-limit">Unlimited</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">My Market</span><span class="plan-feature-tag tag-full">Full</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">My Products</span><span class="plan-feature-tag tag-limit">20 Products</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">My Tools</span><span class="plan-feature-tag tag-full">Full</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">Safe Mission</span><span class="plan-feature-tag tag-full">Full</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">Trade Fairs</span><span class="plan-feature-tag tag-full">Full</span></li>
+              </ul>
+              <button class="plan-cta-btn" type="button" disabled><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg> Current Plan</button>
+            </article>
+
+            <!-- Platinum -->
+            <article class="plan-card plan-platinum plan-best" aria-labelledby="plan-platinum-name">
+              <div class="plan-corner-ribbon">Best Choice</div>
+              <div class="plan-card-header">
+                <div class="plan-icon-badge" aria-hidden="true"><svg class="icon" width="26" height="26"><use href="#icon-gem"></use></svg></div>
+                <h3 class="plan-name" id="plan-platinum-name">Platinum</h3>
+                <p class="plan-tagline">Complete Plan</p>
+              </div>
+              <div class="plan-duration-chip"><svg class="icon" width="13" height="13" aria-hidden="true"><use href="#icon-calendar"></use></svg> 12 Months Plan</div>
+              <div class="plan-pricing">
+                <span class="plan-pricing-label">Total you pay</span>
+                <div class="plan-total-price"><span class="plan-currency">₹</span>59,988</div>
+                <div class="plan-monthly-price">₹4,999 / month</div>
+                <div class="plan-save-badge">Best Value</div>
+              </div>
+              <div class="plan-services-count">16 Services Included</div>
+              <ul class="plan-feature-list">
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">Export Promotional Meetings</span><span class="plan-feature-tag tag-full">Full</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">FEED Card</span><span class="plan-feature-tag tag-full">Full</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">FEED World</span><span class="plan-feature-tag tag-full">Full</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">Know Your Schemes</span><span class="plan-feature-tag tag-full">Full</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">Krushi Yeva Jayate</span><span class="plan-feature-tag tag-full">Full</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">Loans &amp; Finance</span><span class="plan-feature-tag tag-full">Full</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">My Business</span><span class="plan-feature-tag tag-full">Full</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">My Education</span><span class="plan-feature-tag tag-full">Full</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">My Exports</span><span class="plan-feature-tag tag-limit">Full Access</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">My Farm</span><span class="plan-feature-tag tag-limit">Unlimited</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">My Market</span><span class="plan-feature-tag tag-full">Full</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">My FPO / Organization</span><span class="plan-feature-tag tag-full">Full</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">My Products</span><span class="plan-feature-tag tag-limit">Unlimited</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">My Tools</span><span class="plan-feature-tag tag-full">Full</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">Safe Mission</span><span class="plan-feature-tag tag-full">Full</span></li>
+                <li><svg class="icon plan-feature-check" width="16" height="16" aria-hidden="true"><use href="#icon-circle-check"></use></svg><span class="plan-feature-name">Trade Fairs</span><span class="plan-feature-tag tag-full">Full</span></li>
+              </ul>
+              <button class="plan-cta-btn" type="button" data-plan-upgrade="Platinum">Upgrade to Platinum <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#icon-arrow-right"></use></svg></button>
+            </article>
+          </div>
+
+          <div class="plans-footer-note">
+            <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#icon-info"></use></svg>
+            <span>Subscriptions are activated after admin approval. You'll receive an in-app notification once your access is activated.</span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Dims the page while the dashboard menu drawer is open (below 1200px) -->
+  <div class="db-sidebar-backdrop" data-sidebar-backdrop hidden></div>
+
+  <!-- Logged-in devices (My Account → Devices). Rows are drawn by devices.js. -->
+  <div class="devices-popover" id="devices-dialog" role="dialog" aria-labelledby="devices-title" aria-describedby="devices-desc" hidden data-devices>
+    <div class="devices-head">
+      <h2 class="devices-title" id="devices-title">Logged-in devices</h2>
+      <button class="devices-close" type="button" aria-label="Close" data-devices-close>
+        <svg class="icon" width="20" height="20" aria-hidden="true"><use href="#icon-x"></use></svg>
+      </button>
+    </div>
+    <p class="devices-desc" id="devices-desc">You can be logged in on up to 3 devices at once. Log out of one below to free up a slot.</p>
+    <ul class="devices-list" data-devices-list></ul>
+  </div>
+
+  <!-- Short confirmations and notices (FEED.toast in utils.js) -->
+  <div class="toast-region" role="status" aria-live="polite" data-toast-region></div>
+
+  <!-- =====================================================================
+       SITE FOOTER
+       ===================================================================== -->
+  <footer class="new-footer">
+    <img class="footer-banner-img" src="assets/images/footer/footer-farm.webp" alt="" loading="lazy" width="2000" height="668">
+    <div class="footer-panel" aria-hidden="true"></div>
+    <img class="footer-front" src="assets/images/footer/footer-front.webp" alt="" loading="lazy" width="2000" height="668">
+
+    <div class="footer-content">
+      <!-- A paper plane crossing the sky above the footer panel -->
+      <svg class="footer-flight" focusable="false" viewBox="-108 -42 170 84" aria-hidden="true">
+        <defs>
+          <linearGradient id="footer-plane-body" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffffff"/>
+            <stop offset="0.6" stop-color="#f1f5fa"/>
+            <stop offset="1" stop-color="#bccbdd"/>
+          </linearGradient>
+          <linearGradient id="footer-plane-wing" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#5db4f5"/>
+            <stop offset="1" stop-color="#1a7fe0"/>
+          </linearGradient>
+          <linearGradient id="footer-plane-fin" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#e4effa"/>
+            <stop offset="1" stop-color="#8fc3ef"/>
+          </linearGradient>
+          <linearGradient id="footer-plane-trail" x1="1" y1="0" x2="0" y2="0">
+            <stop offset="0" stop-color="#3f9b2c"/>
+            <stop offset="0.45" stop-color="#8cc56f" stop-opacity="0.75"/>
+            <stop offset="1" stop-color="#c9e4b4" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <g transform="rotate(-6)">
+          <g class="footer-plane-art">
+            <path d="M -4 29 C -24 41 -54 37 -78 22 C -88 15 -96 8 -102 1 C -84 17 -58 27 -34 25 C -24 24.5 -15 23 -9 21 Z" fill="url(#footer-plane-trail)"/>
+            <path d="M 20 -8 L -3 -9 L -24 -28 C -25.5 -29.5 -24 -31 -22 -30.5 L -11 -29 Z" fill="url(#footer-plane-wing)"/>
+            <path d="M -41 -4 L -50 -29 C -50.5 -31.5 -47 -33 -44.5 -31 L -24 -9 Z" fill="url(#footer-plane-fin)"/>
+            <path d="M -47 -2 C -32 -8 -6 -10 20 -10 C 35 -10 47 -7 52 -2 C 55 1 53 4 47 5.5 C 31 9.5 -8 10.5 -27 8.5 C -37 7.5 -44 3 -47 -2 Z" fill="url(#footer-plane-body)"/>
+            <path d="M 52 -2.2 C 56 2 52 6 46 7.4 C 35 10 20 10.8 5 11 L 7 7.2 C 22 6.8 36 5.4 44 3 C 48 1.8 50.5 0.2 52 -2.2 Z" fill="#1a7fe0"/>
+            <g fill="#1a7fe0">
+              <rect x="-31" y="-1.5" width="4.6" height="6" rx="1.4"/>
+              <rect x="-19" y="-2.2" width="4.6" height="6" rx="1.4"/>
+              <rect x="-7" y="-2.8" width="4.6" height="6" rx="1.4"/>
+              <rect x="5" y="-3.2" width="4.6" height="6" rx="1.4"/>
+              <rect x="29" y="-7" width="4" height="3.8" rx="1.1"/>
+              <rect x="34.5" y="-6.7" width="4" height="3.8" rx="1.1"/>
+              <rect x="40" y="-6" width="4" height="3.8" rx="1.1"/>
+            </g>
+            <path d="M -54 8.5 C -47 2.5 -38 -0.5 -28 1 C -30 5.5 -42 10.5 -51 10.5 C -53 10.5 -55 9.5 -54 8.5 Z" fill="#64b5f6"/>
+            <path d="M 23 3 C 18 13 7 24 -5 31 C -11 34 -19 34 -24 31 C -14 32 -6 28 0 23 Z" fill="#3f9b2c"/>
+            <path d="M 23 3 C 12 3 -2 4.5 -8 7.5 C -12 15 -18 25 -24 31 C -17 32.5 -10 31 -5 28 C 7 22 17 12 23 3 Z" fill="url(#footer-plane-wing)"/>
+          </g>
+        </g>
+      </svg>
+
+      <div class="footer-main">
+        <div class="footer-brand">
+          <img class="footer-logo" src="assets/images/footer/feed-logo.png" alt="" loading="lazy" width="220" height="212">
+          <p class="footer-brand-name">FEED</p>
+          <p class="footer-about">FEED is a multi-state cooperative society working for the uplift of exports from all corners of India.</p>
+          <p class="footer-subscribe-title" id="subscribe-title">Stay updated with latest insights &amp; opportunities</p>
+          <form class="footer-subscribe" action="#" method="post" aria-labelledby="subscribe-title" data-subscribe>
+            <input type="email" name="email" placeholder="Your e-mail address" aria-label="Your e-mail address" autocomplete="email" required>
+            <button type="submit" aria-label="Subscribe">
+              <svg class="icon" width="24" height="24" aria-hidden="true"><use href="#icon-send"></use></svg>
+            </button>
+          </form>
+          <p class="footer-subscribe-status" role="status" data-subscribe-status></p>
+        </div>
+
+        <nav class="footer-col footer-col--quick" aria-labelledby="footer-quick-title">
+          <h2 class="footer-title" id="footer-quick-title">
+            <span class="footer-title-icon" aria-hidden="true"><svg class="icon" width="24" height="24"><use href="#icon-link"></use></svg></span>
+            <span class="footer-title-text">Quick Links</span>
+          </h2>
+          <ul class="footer-links">
+            <li><svg class="icon footer-chevron" width="24" height="24" stroke-width="3" aria-hidden="true"><use href="#icon-chevron-right"></use></svg><a class="footer-link" href="#" data-route="about">About Us</a></li>
+            <li><svg class="icon footer-chevron" width="24" height="24" stroke-width="3" aria-hidden="true"><use href="#icon-chevron-right"></use></svg><a class="footer-link" href="#db-services">Services</a></li>
+            <li><svg class="icon footer-chevron" width="24" height="24" stroke-width="3" aria-hidden="true"><use href="#icon-chevron-right"></use></svg><a class="footer-link" href="#" data-route="contact">Contact Us</a></li>
+          </ul>
+        </nav>
+
+        <div class="footer-col footer-col--help">
+          <h2 class="footer-title">
+            <span class="footer-title-icon" aria-hidden="true"><svg class="icon" width="24" height="24"><use href="#icon-headset"></use></svg></span>
+            <span class="footer-title-text">FEED Help</span>
+          </h2>
+          <ul class="footer-links">
+            <li><svg class="icon footer-chevron" width="24" height="24" stroke-width="3" aria-hidden="true"><use href="#icon-chevron-right"></use></svg><span class="footer-link-text">FAQ's</span></li>
+            <li><svg class="icon footer-chevron" width="24" height="24" stroke-width="3" aria-hidden="true"><use href="#icon-chevron-right"></use></svg><span class="footer-link-text">Reporting</span></li>
+            <li><svg class="icon footer-chevron" width="24" height="24" stroke-width="3" aria-hidden="true"><use href="#icon-chevron-right"></use></svg><span class="footer-link-text">Documentation</span></li>
+            <li><svg class="icon footer-chevron" width="24" height="24" stroke-width="3" aria-hidden="true"><use href="#icon-chevron-right"></use></svg><span class="footer-link-text">Support Policy</span></li>
+            <li><svg class="icon footer-chevron" width="24" height="24" stroke-width="3" aria-hidden="true"><use href="#icon-chevron-right"></use></svg><span class="footer-link-text">Terms &amp; Conditions</span></li>
+            <li><svg class="icon footer-chevron" width="24" height="24" stroke-width="3" aria-hidden="true"><use href="#icon-chevron-right"></use></svg><span class="footer-link-text">Disclaimer</span></li>
+          </ul>
+        </div>
+
+        <!-- FEED services, shown for reference only (no links) -->
+        <div class="footer-col footer-col--services">
+          <h2 class="footer-title">
+            <span class="footer-title-icon" aria-hidden="true"><svg class="icon" width="24" height="24"><use href="#icon-layers"></use></svg></span>
+            <span class="footer-title-text">FEED Services</span>
+          </h2>
+          <div class="footer-services-lists">
+            <ul class="footer-links">
+              <li><svg class="icon footer-chevron" width="24" height="24" stroke-width="3" aria-hidden="true"><use href="#icon-chevron-right"></use></svg><span class="footer-link-text">MY ORG</span></li>
+              <li><svg class="icon footer-chevron" width="24" height="24" stroke-width="3" aria-hidden="true"><use href="#icon-chevron-right"></use></svg><span class="footer-link-text">MY BUSINESS</span></li>
+              <li><svg class="icon footer-chevron" width="24" height="24" stroke-width="3" aria-hidden="true"><use href="#icon-chevron-right"></use></svg><span class="footer-link-text">MY EXPORTS</span></li>
+              <li><svg class="icon footer-chevron" width="24" height="24" stroke-width="3" aria-hidden="true"><use href="#icon-chevron-right"></use></svg><span class="footer-link-text footer-link--compact">KRUSHI YEVA JAYATE</span></li>
+              <li><svg class="icon footer-chevron" width="24" height="24" stroke-width="3" aria-hidden="true"><use href="#icon-chevron-right"></use></svg><span class="footer-link-text">PRODUCT 360</span></li>
+              <li><svg class="icon footer-chevron" width="24" height="24" stroke-width="3" aria-hidden="true"><use href="#icon-chevron-right"></use></svg><span class="footer-link-text">SAFE MISSION</span></li>
+              <li><svg class="icon footer-chevron" width="24" height="24" stroke-width="3" aria-hidden="true"><use href="#icon-chevron-right"></use></svg><span class="footer-link-text">MY MARKET</span></li>
+            </ul>
+            <ul class="footer-links">
+              <li><svg class="icon footer-chevron" width="24" height="24" stroke-width="3" aria-hidden="true"><use href="#icon-chevron-right"></use></svg><span class="footer-link-text">EPM</span></li>
+              <li><svg class="icon footer-chevron" width="24" height="24" stroke-width="3" aria-hidden="true"><use href="#icon-chevron-right"></use></svg><span class="footer-link-text">TRADE FAIRS</span></li>
+              <li><svg class="icon footer-chevron" width="24" height="24" stroke-width="3" aria-hidden="true"><use href="#icon-chevron-right"></use></svg><span class="footer-link-text">MY EDUCATION</span></li>
+              <li><svg class="icon footer-chevron" width="24" height="24" stroke-width="3" aria-hidden="true"><use href="#icon-chevron-right"></use></svg><span class="footer-link-text">FEED WORLD</span></li>
+              <li><svg class="icon footer-chevron" width="24" height="24" stroke-width="3" aria-hidden="true"><use href="#icon-chevron-right"></use></svg><span class="footer-link-text">FEED CARD</span></li>
+              <li><svg class="icon footer-chevron" width="24" height="24" stroke-width="3" aria-hidden="true"><use href="#icon-chevron-right"></use></svg><span class="footer-link-text">MY TOOLS</span></li>
+              <li><svg class="icon footer-chevron" width="24" height="24" stroke-width="3" aria-hidden="true"><use href="#icon-chevron-right"></use></svg><span class="footer-link-text footer-link--compact">KNOW YOUR SCHEMES</span></li>
+              <li><svg class="icon footer-chevron" width="24" height="24" stroke-width="3" aria-hidden="true"><use href="#icon-chevron-right"></use></svg><span class="footer-link-text">LOANS &amp; FINANCE</span></li>
+              <li><svg class="icon footer-chevron" width="24" height="24" stroke-width="3" aria-hidden="true"><use href="#icon-chevron-right"></use></svg><span class="footer-link-text">YUVA KRISHI</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-col footer-col--contact">
+          <h2 class="footer-title">
+            <span class="footer-title-icon" aria-hidden="true"><svg class="icon" width="24" height="24"><use href="#icon-phone"></use></svg></span>
+            <span class="footer-title-text">Get In Touch with Us</span>
+          </h2>
+          <address>
+            <ul class="footer-contact">
+              <li><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#icon-map-pin-solid"></use></svg>Vijayawada</li>
+              <li><svg class="icon" width="24" height="24" aria-hidden="true"><use href="#icon-phone"></use></svg><a href="tel:+919293858689">+91 9293858689</a></li>
+              <li><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#icon-envelope"></use></svg><a href="mailto:feedstartup2021@gmail.com">feedstartup2021@gmail.com</a></li>
+            </ul>
+          </address>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copyright"><strong>&copy; <span data-year>2026</span> FEED Organization.</strong> All Rights Reserved.</p>
+        <div class="footer-follow">
+          <span class="footer-follow-label">Follow Us:</span>
+          <span class="footer-follow-divider" aria-hidden="true"></span>
+          <a class="footer-social footer-social--facebook" href="#" aria-label="Facebook"><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#icon-facebook"></use></svg></a>
+          <a class="footer-social footer-social--linkedin" href="#" aria-label="LinkedIn"><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#icon-linkedin"></use></svg></a>
+          <a class="footer-social footer-social--instagram" href="#" aria-label="Instagram"><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#icon-instagram"></use></svg></a>
+          <a class="footer-social footer-social--youtube" href="#" aria-label="YouTube"><svg class="icon" width="16" height="16" aria-hidden="true"><use href="#icon-youtube"></use></svg></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

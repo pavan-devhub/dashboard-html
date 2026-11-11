@@ -1,0 +1,207 @@
+/* ==========================================================================
+   Notification bell - navbar bell button and its notifications panel.
+   (source: src/components/NotificationBell.css)
+   ========================================================================== */
+
+/* Navbar notifications bell (NotificationBell.jsx). Prefix: nb- */
+
+.nb-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Same round button as the navbar's search button. */
+.nb-bell {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid #eef2e6;
+  color: var(--fw-forest, #0b5d3b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(15, 23, 42, 0.10);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nb-bell:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.15);
+}
+
+.nb-bell:focus-visible {
+  outline: 2px solid var(--fw-forest, #0b5d3b);
+  outline-offset: 2px;
+}
+
+.nb-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: #e11d48;
+  color: #fff;
+  border: 2px solid #fff;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 14px;
+  text-align: center;
+}
+
+.nb-panel {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: -8px;
+  z-index: 1100;
+  width: 380px;
+  max-height: min(560px, calc(100vh - 110px));
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 20px 48px rgba(15, 23, 42, 0.18);
+  overflow: hidden;
+  text-align: left;
+  animation: nb-drop-in 0.2s ease;
+}
+@keyframes nb-drop-in {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: none; }
+}
+
+.nb-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.nb-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f2a4a;
+}
+
+.nb-new-pill {
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: #ffe4e6;
+  color: #e11d48;
+  font-size: 11.5px;
+  font-weight: 800;
+}
+
+.nb-empty {
+  margin: 0;
+  padding: 26px 18px;
+  color: #64748b;
+  font-size: 13.5px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.nb-list {
+  list-style: none;
+  margin: 0;
+  padding: 4px 0;
+  overflow-y: auto;
+}
+
+.nb-item {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 11px 16px;
+  border: none;
+  background: transparent;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  font: inherit;
+  transition: background 0.15s ease;
+}
+
+.nb-item:hover {
+  background: #f8fafc;
+}
+
+.nb-item.is-unread {
+  background: #f0fdf4;
+}
+
+.nb-item.is-unread:hover {
+  background: #e6f7ec;
+}
+
+.nb-icon {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+.nb-icon.is-green { background: #dcfce7; color: #16a34a; }
+.nb-icon.is-purple { background: #f3e8ff; color: #9333ea; }
+.nb-icon.is-orange { background: #ffedd5; color: #ea580c; }
+.nb-icon.is-blue { background: #dbeafe; color: #2563eb; }
+
+.nb-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nb-body strong {
+  color: #0f2a4a;
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.nb-body span {
+  color: #475569;
+  font-size: 12.5px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.nb-body small {
+  color: #94a3b8;
+  font-size: 11.5px;
+  margin-top: 2px;
+}
+
+.nb-dot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  margin-top: 6px;
+  border-radius: 50%;
+  background: #16a34a;
+}
+
+@media (max-width: 640px) {
+  .nb-panel {
+    position: fixed;
+    top: 72px;
+    left: 12px;
+    right: 12px;
+    width: auto;
+  }
+}

@@ -1,0 +1,275 @@
+/* ==========================================================================
+   FEED Services - the grid of service cards (home page block reused on the dashboard).
+   (source: src/components/HomeServices.css)
+   ========================================================================== */
+
+.home-services {
+  /* Each size takes the smaller of a width-based and a height-based value, so on a short
+     desktop window the spacing tightens along with the cards */
+  --pad: clamp(20px, min(3.5vw, 4svh), 72px);
+  --title: clamp(28px, min(3.4vw, 6svh), 64px);
+  --head-gap: clamp(14px, min(3.2vw, 3.5svh), 60px);
+  --gap-x: clamp(12px, 1.1vw, 22px);
+  --gap-y: clamp(12px, min(1.6vw, 2.4svh), 32px);
+  width: 100%;
+  /* Extra room at the top, so the heading sits clear of the sea above it */
+  padding-block: calc(var(--pad) + clamp(20px, 3.5vw, 56px)) var(--pad);
+  /* The design's farmland backdrop. Anchored to the bottom so the fields, the gold swoosh and
+     the hills always show in full; any crop comes off the sky */
+  background: #faf9f1 url('../../images/backgrounds/services-bg.webp') center bottom / cover no-repeat;
+}
+/* The home page gives its ant mascot a narrow left column; the dashboard (--noAnt, below) uses the full width */
+.home-services-stage {
+  max-width: 1880px;
+  margin: 0 auto;
+  padding-inline: 2% 2.5%;
+  display: grid;
+  grid-template-columns: 20fr 80fr;
+  column-gap: 2%;
+}
+.home-services-main {
+  min-width: 0;
+  align-self: center;
+  /* Nudged left towards the ant. A relative offset, so the grid keeps its width and the cards their size */
+  position: relative;
+  left: -4%;
+  /* Square cards make four rows taller than most windows, so the block simply scrolls with
+     the page. Capped so the squares stay a comfortable size on very wide screens */
+  justify-self: center;
+  width: 100%;
+  max-width: 1120px;
+}
+.home-services-head { margin-bottom: var(--head-gap); text-align: center; }
+.home-services-titlebar { display: flex; align-items: center; justify-content: center; gap: clamp(14px, 1.4vw, 28px); }
+.home-services-title {
+  font-size: var(--title);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: 0.5px;
+  color: #0f1d3a;
+  text-transform: uppercase;
+}
+.home-services-title span { color: #1a8f2e; }
+/* Gold rules either side of the title, each ending in a dot next to it */
+.home-services-rule {
+  position: relative;
+  width: clamp(60px, 7.5vw, 150px);
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #c9a24b);
+}
+.home-services-rule:last-child { background: linear-gradient(270deg, transparent, #c9a24b); }
+.home-services-rule::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #c9a24b;
+  transform: translateY(-50%);
+}
+.home-services-rule:last-child::after { right: auto; left: -4px; }
+
+.home-services-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-y);
+}
+.home-services-row {
+  display: flex;
+  align-items: center;
+  /* The cards' side padding stands in for a gap, so the pointer never drops into dead space
+     between two cards (which would reset the row mid-hover) */
+  margin-inline: calc(var(--gap-x) / -2);
+}
+.home-service-card {
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  /* A sliver of room above and below the box, so with the row gap the space between rows
+     roughly matches the space between columns */
+  padding: clamp(4px, 0.35vw, 7px) calc(var(--gap-x) / 2);
+  border: 0;
+  background: none;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+}
+/* Hidden until the block scrolls into view (main.js) - only when scripts run, so it never stays hidden */
+.js .home-services:not(.is-visible) .home-service-card { opacity: 0; }
+.home-services.is-visible .home-service-card {
+  opacity: 1;
+  animation: homeServiceIn 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) calc(var(--i) * 40ms) backwards;
+}
+@keyframes homeServiceIn {
+  from { opacity: 0; transform: translateY(24px) scale(0.94); }
+  to { opacity: 1; transform: none; }
+}
+/* A square: the name across the top, a short gold rule, then the icon below. Everything
+   inside is sized in cqw (percent of the card's width), so a card keeps the same look at
+   any size. The box fills 98% of its slot, the rest becoming gap */
+.home-service-box {
+  position: relative;
+  flex: none;
+  width: 98%;
+  min-width: 0;
+  margin-inline: auto;
+  aspect-ratio: 1;
+  display: grid;
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+  background: #ffffff;
+  border: 1px solid #e9ebef;
+  border-radius: 12px;
+  box-shadow: 0 10px 26px -16px rgba(15, 23, 42, 0.28);
+  container-type: inline-size;
+  transition: transform 0.35s var(--ease), background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.home-service-card:hover .home-service-box,
+.home-service-card:focus-visible .home-service-box {
+  background: #f3fbf1;
+  border-color: #9ad89a;
+  box-shadow: 0 18px 34px -16px rgba(22, 163, 74, 0.45);
+}
+.home-service-card:focus-visible { outline: none; }
+.home-service-card:focus-visible .home-service-box { outline: 2px solid #16a34a; outline-offset: 3px; }
+.home-service-face {
+  grid-area: 1 / 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* A slimmer bottom edge gives the icon more height in the same-size box */
+  padding: 8cqw 7cqw 4cqw;
+  text-align: center;
+}
+/* Always two lines tall, so the rules and icons line up across a row whether a name wraps or not */
+.home-service-name {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: 2.5em;
+  overflow-wrap: break-word;
+  font-size: clamp(12px, 6.4cqw, 19px);
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: 0.3px;
+  color: #0f1d3a;
+}
+.home-service-divider {
+  flex: none;
+  width: 18cqw;
+  height: 2px;
+  margin-block: 3cqw;
+  border-radius: 1px;
+  background: linear-gradient(90deg, transparent, #c9a24b, transparent);
+}
+/* The space under the rule, shared by the icon and the description: opening a card swaps one
+   for the other, while the name and rule stay put above */
+.home-service-body {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 0;
+  display: grid;
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+  place-items: center;
+}
+/* Cover crops the wider artwork to its centred circle; multiply drops the white backdrop into
+   the box's tint */
+.home-service-icon {
+  grid-area: 1 / 1;
+  width: 64cqw;
+  max-height: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  mix-blend-mode: multiply;
+  transition: transform 0.35s var(--ease), opacity 0.2s ease;
+}
+/* A landscape logo keeps its own shape, using the card's full width instead */
+.home-service-icon.is-wide { width: 84cqw; max-width: 100%; aspect-ratio: auto; object-fit: contain; }
+/* The slot is already as tall as the body, so artwork with a wide white margin grows by
+   trimming that margin: the clip cancels the scale, leaving the same footprint in the card */
+.home-service-icon.is-padded { scale: 1.25; clip-path: inset(10%); }
+.home-service-card:hover .home-service-icon { transform: scale(1.05); }
+.home-service-desc {
+  grid-area: 1 / 1;
+  min-width: 0;
+  max-height: 100%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  overflow: hidden;
+  padding-inline: 2cqw;
+  opacity: 0;
+  transform: translateY(6px);
+  font-size: clamp(13px, 6cqw, 17.5px);
+  font-weight: 600;
+  line-height: 1.45;
+  color: #14532d;
+  text-align: center;
+  transition: opacity 0.12s ease, transform 0.3s ease;
+}
+
+/* Pointing at a card brings it forward and enlarges it, while its row-mates shrink back to
+   give it their room; its icon gives way to the description, under its name */
+@media (hover: hover) and (min-width: 1200px) {
+  .home-services-row:has(.home-service-card:hover, .home-service-card:focus-visible) .home-service-box { transform: scale(0.92); }
+  .home-services-row .home-service-card:hover,
+  .home-services-row .home-service-card:focus-visible { z-index: 1; }
+  .home-services-row .home-service-card:hover .home-service-box,
+  .home-services-row .home-service-card:focus-visible .home-service-box { transform: scale(1.12); }
+  .home-service-card:hover .home-service-icon,
+  .home-service-card:focus-visible .home-service-icon { opacity: 0; }
+  .home-service-card:hover .home-service-desc,
+  .home-service-card:focus-visible .home-service-desc {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.3s ease 0.12s, transform 0.4s var(--ease) 0.12s;
+  }
+}
+/* Smaller and touch screens keep the face; the description has no room there */
+@media (hover: none), (max-width: 1199px) {
+  .home-service-desc { display: none; }
+}
+
+/* Narrower screens: heading first, then as many columns of cards as fit */
+@media (max-width: 1199px) {
+  .home-services-stage { display: flex; flex-direction: column; padding-inline: 16px; }
+  .home-services-main { display: contents; }
+  .home-services-head { order: 0; margin-bottom: 16px; }
+  .home-services-grid { order: 2; display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
+  .home-services-row { display: contents; }
+  .home-service-card { padding: 0; }
+  .home-service-card:hover .home-service-box { transform: translateY(-3px); }
+}
+/* Tablets: the 16 services as four even rows of four */
+@media (min-width: 700px) and (max-width: 1199px) {
+  .home-services-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+/* Large phones and small tablets: two square cards a row */
+@media (max-width: 699px) {
+  .home-services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+}
+/* Phones */
+@media (max-width: 559px) {
+  /* Shorter rules and title, so "FEED SERVICES" stays on one line */
+  .home-services-title { font-size: 26px; }
+  .home-services-rule { width: 28px; }
+  .home-services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .home-service-box { width: 100%; margin: 0; }
+  .home-service-face { padding: 7cqw 6cqw 3cqw; }
+}
+
+/* Without the ant (the dashboard), the heading and cards take the whole width */
+.home-services--noAnt .home-services-stage { grid-template-columns: minmax(0, 1fr); }
+.home-services--noAnt .home-services-main { left: 0; }
+
+
+/* FEED SERVICES: the home page's block (src/components/HomeServices), rounded like the hero above it */
+.db-services {
+  border-radius: 30px;
+}

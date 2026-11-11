@@ -1,0 +1,99 @@
+/* ==========================================================================
+   Dashboard views - the main column shows one at a time (router.js): Home, My Profile,
+   Status of Activities, ERS and Plans. This file holds the Home wrapper and My Profile's
+   tabs and empty panels (inline styles in src/pages/Dashboard.jsx).
+   ========================================================================== */
+
+.db-view--home {
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
+}
+
+/* View headings take focus when a view opens (for screen readers); no ring for that */
+[data-view-focus]:focus {
+  outline: none;
+}
+
+/* --- My Profile --- */
+.db-profile {
+  padding: 24px;
+}
+
+.db-profile-tabs {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 16px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+}
+.db-profile-tabs::-webkit-scrollbar { display: none; }
+
+.db-profile-tab {
+  --tab-bg: #eef2ff;
+  --tab-fg: #4f46e5;
+  --tab-border: #c7d2fe;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border: 1px solid var(--tab-border);
+  border-radius: 12px;
+  background: var(--tab-bg);
+  color: var(--tab-fg);
+  /* the browser's default button size, as the React tabs (buttons) used */
+  font-size: 13.333px;
+  font-weight: 600;
+  white-space: nowrap;
+  text-decoration: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  scroll-snap-align: start;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.db-profile-tab:hover { transform: translateY(-1px); }
+.db-profile-tab[aria-current="page"] {
+  padding: 11px 19px;
+  border: 2px solid var(--tab-fg);
+  box-shadow: 0 4px 10px var(--tab-border);
+}
+.db-profile-tab:focus-visible {
+  outline: 2px solid var(--tab-fg);
+  outline-offset: 2px;
+}
+.db-profile-tab.tab-indigo { --tab-bg: #eef2ff; --tab-fg: #4f46e5; --tab-border: #c7d2fe; }
+.db-profile-tab.tab-green { --tab-bg: #f0fdf4; --tab-fg: #16a34a; --tab-border: #bbf7d0; }
+.db-profile-tab.tab-orange { --tab-bg: #fff7ed; --tab-fg: #ea580c; --tab-border: #fed7aa; }
+.db-profile-tab.tab-teal { --tab-bg: #f0fdfa; --tab-fg: #0d9488; --tab-border: #ccfbf1; }
+
+.db-profile-panel {
+  margin-top: 24px;
+  min-height: 60vh;
+}
+
+/* The sections whose content is still to come */
+.db-profile-empty {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  border: 2px dashed #cbd5e1;
+  border-radius: 16px;
+  background: #ffffff;
+  color: #94a3b8;
+  font-size: 1.125rem;
+  text-align: center;
+}
+
+/* Phones: the view uses the full width; the tabs scroll sideways */
+@media (max-width: 767.98px) {
+  .db-profile { padding: 0; }
+  .db-profile-tabs { margin-inline: -16px; padding-inline: 16px; scroll-padding-inline: 16px; }
+  .db-profile-tab { padding: 10px 16px; }
+  .db-profile-tab[aria-current="page"] { padding: 9px 15px; }
+  .db-profile-panel { margin-top: 12px; min-height: 0; }
+  .db-profile-empty { min-height: 40vh; }
+}

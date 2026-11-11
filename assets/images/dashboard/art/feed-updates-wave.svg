@@ -1,0 +1,64 @@
+<svg width="340" height="112" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 112" preserveAspectRatio="none">
+<defs>
+<linearGradient id="dbUpdBlue" x1="0" y1="0.3" x2="1" y2="0">
+<stop offset="0%" stop-color="#1d4ed8">
+</stop>
+<stop offset="45%" stop-color="#1f5ae0">
+</stop>
+<stop offset="80%" stop-color="#2563eb">
+</stop>
+<stop offset="100%" stop-color="#3b82f6">
+</stop>
+</linearGradient>
+<linearGradient id="dbUpdSheen" x1="0" y1="0" x2="1" y2="0">
+<stop offset="0%" stop-color="#3b82f6" stop-opacity="0.75">
+</stop>
+<stop offset="60%" stop-color="#60a5fa" stop-opacity="0.55">
+</stop>
+<stop offset="100%" stop-color="#93c5fd" stop-opacity="0.35">
+</stop>
+</linearGradient>
+<linearGradient id="dbUpdUnder" x1="0" y1="0" x2="1" y2="0">
+<stop offset="0%" stop-color="#93c5fd" stop-opacity="0.75">
+</stop>
+<stop offset="55%" stop-color="#bfdbfe" stop-opacity="0.35">
+</stop>
+<stop offset="100%" stop-color="#dbeafe" stop-opacity="0">
+</stop>
+</linearGradient>
+<linearGradient id="dbUpdSun" x1="1" y1="0.4" x2="0.55" y2="0">
+<stop offset="0%" stop-color="#f97316">
+</stop>
+<stop offset="40%" stop-color="#fb923c" stop-opacity="0.95">
+</stop>
+<stop offset="75%" stop-color="#fed7aa" stop-opacity="0.55">
+</stop>
+<stop offset="100%" stop-color="#ffffff" stop-opacity="0">
+</stop>
+</linearGradient>
+<filter id="dbUpdSoft" x="-30%" y="-60%" width="160%" height="220%">
+<feGaussianBlur stdDeviation="5">
+</feGaussianBlur>
+</filter>
+<filter id="dbUpdSoftSm" x="-20%" y="-100%" width="140%" height="300%">
+<feGaussianBlur stdDeviation="1.2">
+</feGaussianBlur>
+</filter>
+<clipPath id="dbUpdClip">
+<path d="M0 0 H340 V31 C 316 37, 274 50, 232 56 C 180 63, 90 66, 0 66 Z">
+</path>
+</clipPath>
+</defs>
+<path d="M0 66 C 90 66, 180 63, 232 56 L 236 59 C 182 68, 92 74, 0 76 Z" fill="url(#dbUpdUnder)">
+</path>
+<path d="M0 0 H340 V31 C 316 37, 274 50, 232 56 C 180 63, 90 66, 0 66 Z" fill="url(#dbUpdBlue)">
+</path>
+<path d="M0 50 C 90 50, 182 46, 238 37 C 280 30, 314 18, 340 8 V 31 C 316 37, 274 50, 232 56 C 180 63, 90 66, 0 66 Z" fill="url(#dbUpdSheen)">
+</path>
+<g clip-path="url(#dbUpdClip)">
+<path d="M204 -12 H356 V50 C 320 30, 274 4, 204 -12 Z" fill="url(#dbUpdSun)" filter="url(#dbUpdSoft)">
+</path>
+</g>
+<path d="M314 41 C 324 38, 332 35, 340 31 V 35 C 332 38, 324 41, 316 44 Z" fill="#22c55e" opacity="0.85" filter="url(#dbUpdSoftSm)">
+</path>
+</svg>

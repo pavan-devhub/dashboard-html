@@ -1,0 +1,140 @@
+/* ==========================================================================
+   Logged-in devices - the panel opened from My Account → Devices.
+   (replaces the inline styles of src/components/DevicesModal.jsx and DeviceRow.jsx)
+   ========================================================================== */
+
+.devices-popover {
+  position: fixed;
+  z-index: 2100;
+  top: calc(var(--nav-offset) + 4px);
+  /* Lines up with the right edge of the navbar (max 1320px wide, centred) */
+  right: max(12px, calc((100vw - 1320px) / 2 + 14px));
+  width: min(440px, calc(100vw - 24px));
+  max-height: calc(100vh - var(--nav-offset) - 16px);
+  max-height: calc(100dvh - var(--nav-offset) - 16px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  animation: devices-in 0.2s ease;
+}
+@keyframes devices-in {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: none; }
+}
+
+.devices-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px 24px 4px;
+}
+.devices-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+.devices-close {
+  display: inline-flex;
+  padding: 4px;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  color: #6b7280;
+}
+.devices-close:hover { background: #f3f4f6; }
+
+.devices-desc {
+  padding: 0 24px 12px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #6b7280;
+}
+
+.devices-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+  padding: 0 24px 20px;
+  overflow-y: auto;
+}
+
+.devices-empty {
+  padding: 16px 0;
+  font-size: 13px;
+  color: #6b7280;
+  text-align: center;
+}
+
+.device-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #ffffff;
+}
+.device-row.is-current {
+  border-color: #3e6b36;
+  background: #f1f4ed;
+}
+.device-row-icon { color: #6b7280; }
+.device-row.is-current .device-row-icon { color: #3e6b36; }
+
+.device-row-info {
+  flex: 1;
+  min-width: 0;
+}
+.device-row-name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+.device-row-current {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #3e6b36;
+}
+.device-row-meta {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.device-row-logout {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background: #fee2e2;
+  color: #ef4444;
+  font-size: 12px;
+  font-weight: 600;
+}
+.device-row-logout:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Phones: the panel spans the screen under the navbar; the Log out button drops under the text */
+@media (max-width: 480px) {
+  .devices-head { padding: 16px 16px 4px; }
+  .devices-desc { padding: 0 16px 12px; }
+  .devices-list { padding: 0 16px 16px; }
+  .device-row { flex-wrap: wrap; }
+  .device-row-logout { margin-left: 32px; }
+}

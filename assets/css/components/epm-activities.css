@@ -1,0 +1,602 @@
+/* ==========================================================================
+   Status of Activities - registered EPMs and volunteer registrations with their updates.
+   (source: src/components/dashboard/MyEpmActivities.css)
+   ========================================================================== */
+
+
+/* Dashboard > Status of Activities (MyEpmActivities.jsx). Prefix: mea- */
+
+.mea-page {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  color: #0f2a4a;
+}
+
+/* ---------- tones shared by badges, chips and timeline rows ---------- */
+
+.mea-tone-green { --tone: #15803d; --tone-bg: #dcfce7; }
+.mea-tone-red { --tone: #dc2626; --tone-bg: #fee2e2; }
+.mea-tone-amber { --tone: #b45309; --tone-bg: #fef3c7; }
+.mea-tone-slate { --tone: #475569; --tone-bg: #e2e8f0; }
+.mea-tone-gray { --tone: #64748b; --tone-bg: #f1f5f9; }
+.mea-tone-blue { --tone: #1d4ed8; --tone-bg: #dbeafe; }
+.mea-tone-rose { --tone: #e11d48; --tone-bg: #ffe4e6; }
+
+/* ---------- welcome ---------- */
+
+.mea-welcome {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.mea-welcome-icon {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #e6f4ea;
+  color: #15803d;
+}
+
+.mea-welcome-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.mea-welcome h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+  color: #0f2a4a;
+}
+
+.mea-welcome h2 span:first-child {
+  color: #15803d;
+}
+
+.mea-welcome p {
+  margin: 4px 0 0;
+  color: #475569;
+  font-size: 15px;
+}
+
+.mea-today {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-left: 22px;
+  border-left: 1px solid #e2e8f0;
+  color: #15803d;
+}
+
+.mea-today div {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.35;
+}
+
+.mea-today small {
+  color: #64748b;
+  font-size: 12.5px;
+}
+
+.mea-today strong {
+  color: #0f2a4a;
+  font-size: 15px;
+}
+
+/* ---------- loading / error / empty ---------- */
+
+.mea-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 48px 20px;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+  font-weight: 600;
+}
+
+.mea-state-error {
+  color: #b91c1c;
+  border-color: #fecaca;
+  background: #fff7f7;
+}
+
+.mea-spin {
+  animation: mea-spin 1s linear infinite;
+}
+
+@keyframes mea-spin {
+  to { transform: rotate(360deg); }
+}
+
+.mea-empty {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 18px 20px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px dashed #cbd5e1;
+}
+
+.mea-empty p {
+  margin: 0;
+  color: #475569;
+  font-weight: 600;
+}
+
+/* ---------- sections ---------- */
+
+.mea-section {
+  --accent: #15803d;
+  --accent-soft: #e6f4ea;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid #d9efe0;
+  background: linear-gradient(180deg, #f3fbf6 0%, #fbfdfc 100%);
+}
+
+.mea-section-volunteer {
+  --accent: #c2410c;
+  --accent-soft: #ffedd5;
+  border-color: #fde3c8;
+  background: linear-gradient(180deg, #fff8ef 0%, #fffdfa 100%);
+}
+
+.mea-section-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.mea-section-icon {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.mea-section-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.mea-section-text h3 {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 800;
+  color: #0f2a4a;
+}
+
+.mea-section-volunteer .mea-section-text h3 {
+  color: #14532d;
+}
+
+.mea-section-text p {
+  margin: 3px 0 0;
+  color: #475569;
+  font-size: 14.5px;
+}
+
+.mea-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1.5px solid var(--accent);
+  background: #fff;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s ease;
+}
+
+.mea-link-btn:hover {
+  background: var(--accent-soft);
+}
+
+/* ---------- cards ---------- */
+
+.mea-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mea-card {
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid #e5edf3;
+  box-shadow: 0 2px 10px rgba(15, 42, 74, 0.05);
+  overflow: hidden;
+}
+
+/* The card a notification was about, for a few seconds after opening it from the bell. */
+.mea-card.is-highlighted {
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.45), 0 12px 28px rgba(15, 23, 42, 0.12);
+  transition: box-shadow 0.4s ease;
+}
+
+.mea-card-main {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 18px;
+  cursor: pointer;
+}
+
+.mea-card-main:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+  border-radius: 16px;
+}
+
+.mea-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+/* The card is a <button> in this export (it opens the card's updates), so its title is a span */
+.mea-card-title {
+  display: block;
+  margin: 0 0 2px;
+  font-size: 17px;
+  font-weight: 800;
+  color: #0f2a4a;
+}
+
+.mea-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 28px;
+  color: #334155;
+  font-size: 14.5px;
+}
+
+.mea-card-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.mea-card-meta svg {
+  flex-shrink: 0;
+  color: #475569;
+}
+
+.mea-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.mea-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  background: var(--tone-bg);
+  color: var(--tone);
+}
+
+.mea-card-status {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 150px;
+}
+
+.mea-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  padding: 7px 16px 7px 10px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  background: var(--tone-bg);
+  color: var(--tone);
+}
+
+.mea-card-status small {
+  color: #64748b;
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+.mea-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 20px;
+  border-radius: 999px;
+  border: 1.5px solid #1d4ed8;
+  background: #fff;
+  color: #1d4ed8;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s ease;
+}
+
+.mea-btn-outline:hover {
+  background: #eff6ff;
+}
+
+.mea-chevron {
+  display: grid;
+  place-items: center;
+  color: #0f2a4a;
+  transition: transform 0.2s ease;
+}
+
+.mea-card.is-open .mea-chevron {
+  transform: rotate(180deg);
+}
+
+/* ---------- updates timeline ---------- */
+
+.mea-updates {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 16px;
+  margin: 0 10px 10px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: #f3fbf6;
+}
+
+.mea-section-volunteer .mea-updates {
+  background: #fff8ef;
+}
+
+.mea-updates-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.mea-updates-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  color: var(--accent);
+  box-shadow: 0 1px 4px rgba(15, 42, 74, 0.08);
+}
+
+.mea-updates-head div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-top: 3px;
+}
+
+.mea-updates-head strong {
+  color: var(--accent);
+  font-size: 15.5px;
+}
+
+.mea-updates-head small {
+  color: #475569;
+  font-size: 13px;
+}
+
+.mea-updates-none {
+  margin: 0;
+  align-self: center;
+  color: #15803d;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.mea-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.mea-update {
+  position: relative;
+  display: grid;
+  grid-template-columns: 96px 18px 40px auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0 14px;
+  padding: 7px 0;
+  border-bottom: 1px solid #e5edf3;
+}
+
+.mea-update:last-child {
+  border-bottom: none;
+}
+
+.mea-update-when {
+  color: #334155;
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+/* The dot sits on one continuous vertical line running down the list. */
+.mea-update-dot {
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mea-update-dot::before {
+  content: '';
+  position: absolute;
+  top: -7px;
+  bottom: -7px;
+  left: 50%;
+  border-left: 1.5px solid #fda4af;
+}
+
+.mea-update:first-child .mea-update-dot::before { top: 50%; }
+.mea-update:last-child .mea-update-dot::before { bottom: 50%; }
+.mea-update:only-child .mea-update-dot::before { display: none; }
+
+.mea-update-dot::after {
+  content: '';
+  position: relative;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--tone);
+}
+
+.mea-update-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--tone-bg);
+  color: var(--tone);
+}
+
+.mea-update-tag {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  background: var(--tone-bg);
+  color: var(--tone);
+}
+
+.mea-update-text {
+  margin: 0;
+  color: #1e293b;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.mea-update-text strong {
+  color: #e11d48;
+  font-weight: 800;
+}
+
+/* ---------- smaller screens ---------- */
+
+@media (max-width: 1180px) {
+  .mea-updates {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .mea-welcome {
+    flex-wrap: wrap;
+  }
+
+  .mea-today {
+    padding-left: 0;
+    border-left: none;
+  }
+
+  .mea-section {
+    padding: 14px;
+  }
+
+  .mea-section-head {
+    flex-wrap: wrap;
+  }
+
+  .mea-section-icon {
+    width: 46px;
+    height: 46px;
+  }
+
+  /* Text takes the row beside the icon; the date card and link button drop below it. */
+  .mea-welcome-text,
+  .mea-section-text {
+    flex-basis: calc(100% - 70px);
+  }
+
+  .mea-card-main {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 10px;
+  }
+
+  .mea-chevron {
+    justify-self: end;
+    margin-top: -40px;
+  }
+
+  .mea-update {
+    grid-template-columns: 18px 36px minmax(0, 1fr);
+    gap: 6px 10px;
+  }
+
+  .mea-update-when {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .mea-update-dot {
+    grid-column: 1;
+    grid-row: 1 / span 3;
+  }
+
+  .mea-update-icon {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    width: 36px;
+    height: 36px;
+  }
+
+  .mea-update-tag {
+    grid-column: 3;
+    justify-self: start;
+  }
+
+  .mea-update-text {
+    grid-column: 3;
+  }
+}

@@ -1,0 +1,114 @@
+/* ==========================================================================
+   Base - document defaults, icons, accessibility helpers.
+   ========================================================================== */
+
+html {
+  scroll-behavior: smooth;
+  /* In-page links land below the fixed navbar */
+  scroll-padding-top: calc(var(--nav-offset) + 16px);
+}
+
+body {
+  font-family: var(--font-display);
+  /* The design is built on the font's normal line height; components set their own where it matters */
+  line-height: normal;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  /* Nothing may push the page sideways on small screens */
+  overflow-x: clip;
+}
+
+/* Page shell: header, the dashboard, then the footer */
+.page {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Scroll is locked while a modal menu is open (set by utils.js) */
+body.is-scroll-locked {
+  overflow: hidden;
+}
+
+/* --- Icons ------------------------------------------------------------------
+   Every icon is <svg class="icon" width height><use href="#icon-name"></use></svg> pointing at the
+   inline sprite at the top of <body>. Size comes from the width/height attributes, stroke width from
+   the stroke-width attribute (Lucide's default is 2), and the colour from `color`. */
+.icon {
+  display: inline-block;
+  flex-shrink: 0;
+  vertical-align: middle;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  overflow: visible;
+}
+.icon:not([fill]) { fill: none; }
+.icon:not([stroke-width]) { stroke-width: 2; }
+
+.icon-sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* --- Accessibility helpers ------------------------------------------------- */
+
+/* Hidden from sight, still read by screen readers */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* First Tab stop on the page: jumps past the navbar */
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 2000;
+  padding: 10px 18px;
+  border-radius: 10px;
+  background: var(--color-forest);
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+  transform: translateY(-160%);
+  transition: transform 0.2s ease;
+}
+.skip-link:focus {
+  transform: none;
+  outline: 3px solid var(--color-saffron);
+  outline-offset: 2px;
+}
+
+/* A visible focus ring for keyboard users on anything that doesn't draw its own */
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* <main> takes focus from the skip link; it needs no ring of its own */
+main:focus {
+  outline: none;
+}
+
+/* Visitors who ask for less motion get none of the decorative animation */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

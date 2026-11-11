@@ -1,0 +1,117 @@
+/* ==========================================================================
+   Plan card - current membership plan with the "Manage Plan" button.
+   (source: src/pages/Dashboard.css)
+   ========================================================================== */
+
+/* ======================================================================
+   PLAN CARD
+   ====================================================================== */
+.db-card-plan {
+  overflow: hidden;
+  background: linear-gradient(160deg, #ffffff 0%, #ffffff 50%, #fff7ed 100%);
+  border-color: rgba(249, 115, 22, 0.14);
+}
+.db-card-plan::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 100% 0%, rgba(251, 146, 60, 0.16), transparent 50%);
+  pointer-events: none;
+}
+.db-card-plan:hover { box-shadow: 0 18px 34px rgba(234, 88, 12, 0.15); }
+
+.db-plan-main {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.db-card-plan .db-summary-icon-wrap {
+  background: linear-gradient(145deg, #fde68a, #fbbf24 40%, #f97316);
+  color: #fff;
+  box-shadow: 0 8px 16px rgba(249, 115, 22, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+.db-card-plan .db-summary-subtitle { color: #ea580c; }
+
+.db-plan-corner-ribbon {
+  position: absolute;
+  top: 22px;
+  right: -40px;
+  width: 160px;
+  text-align: center;
+  transform: rotate(45deg);
+  background: linear-gradient(90deg, #fcd34d, #f59e0b 50%, #ea580c);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 6px 0;
+  box-shadow: 0 4px 10px rgba(234, 88, 12, 0.3);
+  z-index: 2;
+}
+
+/* "★ Gold" + "Manage Plan" joined into one pill */
+.db-plan-actions {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  border: 1.5px solid #fdba74;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.12);
+}
+
+.db-plan-tier-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(100deg, #fbbf24, #f97316);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 7px 20px;
+  margin: -1.5px 0 -1.5px -1.5px;
+  border-radius: 999px;
+  box-shadow: 0 4px 10px rgba(249, 115, 22, 0.32);
+  white-space: nowrap;
+}
+
+.db-upgrade-btn {
+  display: inline-flex;
+  text-decoration: none;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: #ea580c;
+  border: none;
+  padding: 7px 18px 7px 20px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.2s ease, gap 0.2s ease;
+}
+.db-upgrade-btn:hover {
+  color: #c2410c;
+  gap: 11px;
+}
+
+.db-card-plan .db-summary-bar-track {
+  position: relative;
+  z-index: 1;
+}
+.db-card-plan .db-summary-bar-fill {
+  width: 100%;
+  background: linear-gradient(90deg, #fcd34d, #f59e0b, #f97316, #ea580c, #f97316, #f59e0b, #fcd34d);
+  background-size: 200% 100%;
+  animation: db-gold-shimmer 4s linear infinite;
+}
+@keyframes db-gold-shimmer {
+  0% { background-position: 0% 0; }
+  100% { background-position: -200% 0; }
+}

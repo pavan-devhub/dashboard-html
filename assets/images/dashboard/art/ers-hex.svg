@@ -1,0 +1,14 @@
+<svg width="100" height="110" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 110">
+<defs>
+<linearGradient id="dbErsHex" x1="10" y1="0" x2="90" y2="110" gradientUnits="userSpaceOnUse">
+<stop offset="0%" stop-color="#c026d3">
+</stop>
+<stop offset="45%" stop-color="#7c3aed">
+</stop>
+<stop offset="100%" stop-color="#3730a3">
+</stop>
+</linearGradient>
+</defs>
+<path d="M50 9 L87 30.5 V79.5 L50 101 L13 79.5 V30.5 Z" fill="url(#dbErsHex)" stroke="url(#dbErsHex)" stroke-width="14" stroke-linejoin="round">
+</path>
+</svg>

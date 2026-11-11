@@ -1,0 +1,353 @@
+/* ==========================================================================
+   Widgets - Central & State Updates and Recent Activity cards (endless scrolling lists).
+   Market Prices has its own file (market-prices.css).
+   (source: src/pages/Dashboard.css)
+   ========================================================================== */
+
+.db-widgets-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+/* WIDGET CARDS. Each card is a white-rimmed panel: a header (its artwork is an image, the icon and
+   title are live on top), the scrolling list, a button, and a scene along the foot. Sizes are in cqw -
+   percent of the card's width - measured off the design at a 610px-wide card, with floors so a narrow
+   card stays readable */
+.db-widget-card {
+  --w-navy: #101a4c;
+  --w-text: #3b4869;
+  --w-muted: #5b6684;
+  --w-rule: #eceff4;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  aspect-ratio: 616 / 582;
+  min-height: 480px;
+  overflow: hidden;
+  border: 3px solid #ffffff;
+  border-radius: 28px;
+  background: #fefefe;
+  box-shadow: 0 16px 32px -14px rgba(30, 41, 59, 0.28), 0 2px 8px rgba(30, 41, 59, 0.06);
+  container-type: inline-size;
+  color: var(--w-navy);
+}
+
+/* --- Header --- */
+.db-widget-header {
+  position: relative;
+  flex-shrink: 0;
+  height: max(58px, 16.07cqw);
+  background: var(--w-head) center top / 100% auto no-repeat;
+}
+.db-widget--alerts { --w-head: url('../../images/dashboard/widgets/alerts-header.webp'); }
+/* Recent Activity's header is white, a blue wave sweeping in on its right, a hairline under it */
+.db-widget--activity { --w-head: url('../../images/dashboard/widgets/recent-activity-header.webp'); }
+.db-widget--activity .db-widget-header { height: max(54px, 15.3cqw); }
+.db-widget--activity .db-widget-header::after {
+  content: '';
+  position: absolute;
+  left: 4.8cqw;
+  right: 2.6cqw;
+  bottom: 0;
+  height: 1px;
+  background: var(--w-rule);
+}
+
+/* Icon, a short upright rule, then the title */
+.db-widget-title {
+  --t-left: 6.3cqw;
+  --t-icon: 7.4cqw;
+  --t-gap1: 3.4cqw;
+  --t-gap2: 3.1cqw;
+  --t-size: 4.35cqw;
+  --t-min: 14px;
+  position: absolute;
+  left: var(--t-left);
+  top: 44.5%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  z-index: 1;
+}
+.db-widget-title-icon {
+  width: max(22px, var(--t-icon));
+  height: max(22px, var(--t-icon));
+}
+.db-widget-title-rule {
+  flex-shrink: 0;
+  width: 2px;
+  height: max(20px, 6.3cqw);
+  margin: 0 var(--t-gap2) 0 var(--t-gap1);
+  border-radius: 2px;
+  background: currentColor;
+  opacity: 0.7;
+}
+.db-widget-title h2 {
+  font-size: max(var(--t-min), var(--t-size));
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.3px;
+  white-space: nowrap;
+  color: inherit;
+}
+.db-widget--alerts .db-widget-title { color: #ffffff; }
+.db-widget--alerts .db-widget-title h2 { text-shadow: 0 1px 2px rgba(0, 0, 0, 0.12); }
+.db-widget--activity .db-widget-title {
+  --t-left: 4.7cqw;
+  --t-icon: 7.9cqw;
+  --t-gap1: 2.5cqw;
+  --t-gap2: 3.4cqw;
+  --t-size: 5.3cqw;
+  --t-min: 16px;
+  top: 45.5%;
+  color: #1f5fe0;
+}
+.db-widget--activity .db-widget-title-rule { background: #1d3a8f; opacity: 1; }
+.db-widget--activity .db-widget-title h2 { color: #13206a; }
+
+/* --- List area: the lists scroll endlessly, fading in and out at the edges --- */
+.db-widget-content {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  padding: 2cqw 4.1cqw 0 4.6cqw;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 4%, black 94%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 4%, black 94%, transparent 100%);
+}
+.db-widget--activity .db-widget-content { padding: 2.2cqw 3.9cqw 0 4.75cqw; }
+
+/* Shared text styles: a bold navy title, the time on the right, a slate line or two below */
+.db-alert-title-row h3,
+.db-activity-info h3 {
+  font-size: max(14px, 3.25cqw);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.2px;
+  color: var(--w-navy);
+}
+.db-alert-info p,
+.db-activity-info p {
+  margin: 0.15em 0 0;
+  font-size: max(12.5px, 3.05cqw);
+  font-weight: 400;
+  line-height: 1.38;
+  color: var(--w-text);
+}
+.db-alert-time,
+.db-activity-top span {
+  font-size: max(11.5px, 2.9cqw);
+  font-weight: 500;
+  color: var(--w-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* The lists loop once widgets.js has appended a hidden copy (.is-looping); they pause under the pointer */
+@keyframes db-list-scroll {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+.db-alert-list,
+.db-activity-list {
+  display: flex;
+  flex-direction: column;
+}
+.db-alert-list.is-looping { animation: db-list-scroll 14.1s linear infinite; }
+.db-activity-list.is-looping { animation: db-list-scroll 16s linear infinite; }
+.db-alert-list:hover,
+.db-activity-list:hover { animation-play-state: paused; }
+
+/* Central & State Updates: a rounded-square icon tile, then the text */
+.db-alert-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 4.75cqw;
+  padding: max(14px, 3.6cqw) 0 max(12px, 3.2cqw);
+  border-bottom: 1px solid var(--w-rule);
+}
+.db-alert-icon {
+  width: max(40px, 10.8cqw);
+  height: max(40px, 10.8cqw);
+  border-radius: 24%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.db-alert-icon svg { width: 57%; height: 57%; }
+.db-alert-icon.is-green { background: #ddf8d6; color: #1f9a35; }
+.db-alert-icon.is-orange { background: #feebc8; color: #f06d14; }
+.db-alert-icon.is-blue { background: #d9ebfd; color: #1f63d6; }
+
+.db-alert-info {
+  flex: 1;
+  min-width: 0;
+}
+/* Descriptions keep to a narrower measure than the title row, wrapping as in the design */
+.db-alert-info p {
+  max-width: 84%;
+  margin-top: 0.08em;
+  line-height: 1.3;
+}
+.db-alert-title-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+.db-alert-title-group {
+  display: flex;
+  align-items: center;
+  gap: 2.2cqw;
+  min-width: 0;
+}
+/* The NEW pill */
+.db-alert-tag {
+  flex-shrink: 0;
+  padding: 0.26em 0.78em;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #62cf3c 0%, #3aac2c 100%);
+  color: #ffffff;
+  font-size: max(10.5px, 2.4cqw);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+/* A narrow card has no room for the tag, title and time on one line: the time drops below the title */
+@container (max-width: 400px) {
+  .db-alert-title-row { flex-wrap: wrap; row-gap: 1px; }
+  .db-alert-title-row .db-alert-time { flex-basis: 100%; }
+  .db-alert-info p { max-width: none; }
+}
+
+/* Recent Activity: a round icon disc, then the text */
+.db-activity-item {
+  display: flex;
+  align-items: center;
+  gap: 5.55cqw;
+  padding: max(10px, 2.3cqw) 0;
+  border-bottom: 1px solid var(--w-rule);
+}
+.db-activity-icon {
+  width: max(40px, 10.5cqw);
+  height: max(40px, 10.5cqw);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.db-activity-icon svg { width: 58%; height: 58%; }
+.db-activity-icon.is-purple { background: #f1e2fd; color: #9a2bd8; }
+.db-activity-icon.is-blue { background: #dbeafe; color: #2563eb; }
+.db-activity-icon.is-green { background: #d3f6dc; color: #16903a; }
+.db-activity-icon.is-orange { background: #fde5d0; color: #f2681a; }
+
+.db-activity-info {
+  flex: 1;
+  min-width: 0;
+}
+.db-activity-info h3 { font-size: max(14px, 3.3cqw); }
+.db-activity-info p { margin-top: 0.05em; font-size: max(12.5px, 3cqw); line-height: 1.25; }
+.db-activity-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* --- Foot: the button, then the scene --- */
+.db-widget-footer {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  padding: 2.2cqw 0 0;
+}
+.db-widget-scene {
+  display: block;
+  flex-shrink: 0;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 610 / 112;
+  pointer-events: none;
+  user-select: none;
+}
+/* Central & State Updates' scene is taller, and its pale sky runs up behind the button */
+.db-widget--alerts .db-widget-scene {
+  aspect-ratio: 988 / 359;
+  margin-top: -7cqw;
+}
+/* Recent Activity's scene (calendar, clipboard, bell, laptop) is taller too, a little below the button */
+.db-widget--activity .db-widget-scene {
+  aspect-ratio: 1031 / 414;
+  margin-top: 1cqw;
+}
+.db-widget-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65em;
+  height: max(40px, 9cqw);
+  padding: 0 1.85em;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  font-size: max(14px, 3.45cqw);
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+.db-widget-btn svg {
+  width: 1.1em;
+  height: 1.1em;
+  transition: transform 0.2s ease;
+}
+.db-widget-btn:hover { transform: translateY(-1px); }
+.db-widget-btn:hover svg { transform: translateX(3px); }
+.db-widget--alerts .db-widget-btn {
+  background: linear-gradient(180deg, #f6731a 0%, #e5560a 100%);
+  color: #ffffff;
+  box-shadow: 0 10px 18px -8px rgba(229, 86, 10, 0.6);
+}
+.db-widget--alerts .db-widget-btn:hover { box-shadow: 0 14px 22px -8px rgba(229, 86, 10, 0.65); }
+.db-widget--activity .db-widget-btn {
+  background: #ffffff;
+  border-color: #2563eb;
+  color: #1d4ed8;
+  box-shadow: 0 8px 18px -12px rgba(37, 99, 235, 0.5);
+}
+.db-widget--activity .db-widget-btn:hover { background: #f5f8ff; }
+
+/* ==========================================================================
+   Responsive tiers - by the width of the main column (container "db-main" in dashboard.css),
+   so the cards fit whether or not the left column is beside them
+   ========================================================================== */
+
+/* Two across; Market Prices takes the next row */
+@container db-main (max-width: 899.98px) {
+  .db-widgets-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* One column (phones): the cards grow with their lists, which stop scrolling and show each item once */
+@container db-main (max-width: 599.98px) {
+  .db-widgets-grid { grid-template-columns: minmax(0, 1fr); }
+  .db-widget-card { aspect-ratio: auto; min-height: 0; height: auto; }
+  .db-widget-content {
+    flex: none;
+    overflow: visible;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .db-alert-list.is-looping,
+  .db-activity-list.is-looping { animation: none; }
+  .db-alert-list > [data-clone],
+  .db-activity-list > [data-clone] { display: none; }
+}

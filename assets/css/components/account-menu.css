@@ -1,0 +1,99 @@
+/* ==========================================================================
+   Account menu - the "My Account" dropdown: the member's picture, name and e-mail,
+   then Dashboard (this page), Devices and Logout.
+   (replaces the inline styles of src/components/Navbar.jsx)
+   ========================================================================== */
+
+.fw-account-dropdown {
+  width: 240px;
+  max-width: calc(100vw - 24px);
+}
+
+.fw-account-summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px 12px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+/* The avatar is a button: picking a picture previews it in the navbar and here */
+.fw-account-avatar-edit {
+  border: none;
+  padding: 0;
+  overflow: visible;
+}
+.fw-account-avatar {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.fw-account-avatar img,
+.fw-account-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.fw-account-avatar-edit:focus-visible {
+  outline: 2px solid #ea580c;
+  outline-offset: 2px;
+}
+
+.fw-account-meta {
+  flex: 1;
+  min-width: 0;
+}
+.fw-account-name,
+.fw-account-email {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.fw-account-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e293b;
+}
+.fw-account-email {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.fw-account-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fw-account-action {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: filter 0.15s ease, background-color 0.15s ease;
+}
+.fw-account-action:hover { filter: brightness(0.97); }
+
+/* This page */
+.fw-account-action--current {
+  background: #ffedd5;
+  color: #ea580c;
+}
+.fw-account-action--danger {
+  background: #fee2e2;
+  color: #ef4444;
+}

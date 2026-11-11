@@ -1,0 +1,139 @@
+/* ==========================================================================
+   Welcome hero - "Welcome, <name>" banner.
+   (source: src/components/dashboard/WelcomeHero.css)
+   ========================================================================== */
+
+/* Dashboard welcome banner - "Welcome, <name>" over the sunrise field, FEED logo on the right. */
+.db-hero {
+  --hero-pad: clamp(28px, 5.5%, 84px);
+  position: relative;
+  border-radius: 30px;
+  overflow: hidden;
+  height: clamp(300px, 22vw, 400px);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 var(--hero-pad);
+  background-color: #cfe6f7;
+  background-image: url('../../images/dashboard/welcome-hero-bg.webp');
+  background-size: cover;
+  background-position: center 72%;
+  background-repeat: no-repeat;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.1), 0 2px 8px rgba(15, 23, 42, 0.05);
+  font-family: 'Outfit', 'Inter', sans-serif;
+}
+
+/* soft light wash on the left so the greeting always reads */
+.db-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.08) 45%, rgba(255, 255, 255, 0) 70%);
+  pointer-events: none;
+}
+
+/* --- greeting: big and centred-left --- */
+.db-hero-welcome {
+  position: absolute;
+  z-index: 3;
+  left: calc(var(--hero-pad) - 26px);
+  top: 50%;
+  max-width: 62%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 16px 26px 18px;
+  transform: translateY(-58%);
+}
+
+/* The heading holds both lines: "Welcome," over the member's name */
+.db-hero-welcome-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.db-hero-welcome-hi {
+  display: block;
+  font-size: clamp(30px, 2.7vw, 46px);
+  font-weight: 800;
+  color: #0b1739;
+  letter-spacing: -0.5px;
+  line-height: 1.05;
+}
+
+.db-hero-welcome-name {
+  display: block;
+  margin: 4px 0 0 0;
+  font-size: clamp(40px, 3.9vw, 66px);
+  font-weight: 800;
+  color: #14532d;
+  letter-spacing: -1px;
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+}
+
+.db-hero-welcome-swoosh {
+  display: block;
+  width: clamp(110px, 11vw, 160px);
+  height: auto;
+  margin-top: 8px;
+}
+
+/* --- logo on the right ---
+   no z-index here on purpose: a stacking context would cut the logo's multiply blend off from the
+   hero photo and bring back its white square */
+.db-hero-logo {
+  position: relative;
+  flex-shrink: 0;
+  height: 64%;
+  aspect-ratio: 1 / 1;
+  margin-right: clamp(0px, 4%, 70px);
+  margin-bottom: 6%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* white halo behind the logo - its white backdrop blends into it (multiply) instead of showing a box */
+.db-hero-logo-glow {
+  position: absolute;
+  inset: -26%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.85) 38%, rgba(255, 255, 255, 0) 70%);
+  pointer-events: none;
+}
+.db-hero-logo img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+@media (max-width: 768px) {
+  .db-hero {
+    height: auto;
+    min-height: 260px;
+    padding: 0 22px;
+    border-radius: 22px;
+    align-items: flex-start;
+  }
+  .db-hero-welcome { left: 0; max-width: 80%; }
+  .db-hero-logo {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    height: 84px;
+    margin: 0;
+  }
+}
+
+/* Small phones: the logo shrinks so the greeting keeps its room */
+@media (max-width: 479.98px) {
+  .db-hero { min-height: 240px; padding: 0 16px; }
+  .db-hero-welcome { max-width: calc(100% - 80px); }
+  .db-hero-welcome-hi { font-size: 28px; }
+  .db-hero-welcome-name { font-size: 36px; }
+  .db-hero-logo { height: 64px; top: 12px; right: 12px; }
+}

@@ -1,0 +1,146 @@
+/* ==========================================================================
+   Krishi Coins card - rewards balance with the animated counter and coin stack.
+   (source: src/pages/Dashboard.css)
+   ========================================================================== */
+
+/* ======================================================================
+   KRISHI COINS CARD
+   ====================================================================== */
+.db-coins2-card {
+  overflow: hidden;
+  background: linear-gradient(112deg, #ffffff 0%, #f2fcf8 38%, #d8f6ec 100%);
+  border-color: rgba(16, 185, 129, 0.22);
+  box-shadow: 0 10px 28px rgba(5, 150, 105, 0.12), 0 2px 6px rgba(15, 23, 42, 0.04);
+}
+.db-coins2-card:hover { box-shadow: 0 20px 40px rgba(5, 150, 105, 0.22), 0 4px 10px rgba(15, 23, 42, 0.06); }
+
+.db-coins2-glow-a { top: -70px; right: -50px; background: #6ee7b7; }
+.db-coins2-glow-b { bottom: -80px; right: 30%; background: #a7f3d0; }
+
+.db-coins2-icon-wrap {
+  background: linear-gradient(145deg, #6ee7b7, #10b981 50%, #059669);
+  box-shadow: 0 8px 16px rgba(5, 150, 105, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+.db-coins2-body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.db-coins2-balance-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  padding-left: 2px;
+}
+.db-coins2-balance {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.db-coins2-balance-value {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: #0f172a;
+  line-height: 1.05;
+}
+.db-coins2-balance-label {
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
+  color: #1e293b;
+}
+.db-coins2-growth {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  width: fit-content;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #15803d;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid #bbf7d0;
+  padding: 4px 11px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+/* --- gold coins visual --- */
+.db-coin-stack {
+  position: relative;
+  width: 112px;
+  height: 96px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+.db-coins2-card:hover .db-coin-stack { transform: translateY(-3px); }
+.db-coin-stack-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.45), transparent 68%);
+  filter: blur(8px);
+  pointer-events: none;
+}
+.db-coin {
+  position: absolute;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 32% 28%, #fff3c4 0%, #fcd34d 30%, #f59e0b 68%, #c2410c 100%);
+  box-shadow: 0 6px 12px rgba(154, 52, 18, 0.32), inset 0 -3px 5px rgba(154, 52, 18, 0.35), inset 0 3px 4px rgba(255, 255, 255, 0.55);
+}
+.db-coin span {
+  font-weight: 800;
+  color: #fff7e0;
+  text-shadow: 0 1px 2px rgba(154, 52, 18, 0.55);
+  line-height: 1;
+}
+.db-coin-back { width: 46px; height: 46px; top: 4px; right: 10px; opacity: 0.95; }
+.db-coin-dot { width: 14px; height: 14px; top: 40px; left: 2px; }
+.db-coin-main {
+  width: 66px;
+  height: 66px;
+  top: 20px;
+  left: 14px;
+  transform: rotate(-10deg);
+  box-shadow: 0 8px 16px rgba(154, 52, 18, 0.35), inset 0 0 0 4px rgba(255, 237, 160, 0.55), inset 0 -4px 6px rgba(154, 52, 18, 0.35);
+}
+.db-coin-main span { font-size: 30px; }
+.db-coin-small { width: 38px; height: 38px; bottom: 2px; right: 6px; }
+.db-coin-small span { font-size: 18px; }
+.db-coin-sparkle {
+  position: absolute;
+  top: 0;
+  left: 52px;
+  width: 12px;
+  height: 12px;
+  background: #fde68a;
+  clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+  filter: drop-shadow(0 0 3px rgba(253, 224, 71, 0.9));
+}
+
+.db-coins2-footer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.db-coins2-cta {
+  border-radius: 999px;
+  padding: 8px 8px 8px 18px;
+  background: linear-gradient(110deg, #047857, #065f46 100%);
+  box-shadow: 0 8px 18px rgba(4, 120, 87, 0.38);
+}
+.db-coins2-cta:hover { box-shadow: 0 12px 24px rgba(4, 120, 87, 0.48); }
+.db-coins2-cta .db-premium-cta-circle { color: #047857; }
